@@ -5,4 +5,6 @@ using UnityEngine;
 public class PlayerStateList : MonoBehaviour
 {
     public bool lookRight;
+    public bool attacking;
+    public bool dashing;
 }
