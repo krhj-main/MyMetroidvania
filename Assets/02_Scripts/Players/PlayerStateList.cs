@@ -7,4 +7,7 @@ public class PlayerStateList : MonoBehaviour
     public bool lookRight;
     public bool attacking;
     public bool dashing;
+    public bool invincible;
+    public bool recoilingX;
+    public bool recoilingY;
 }
