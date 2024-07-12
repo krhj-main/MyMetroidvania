@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rig;
     Animator anim;
     public PlayerStateList pState;
+    Casting cast;
     float gravity;
     bool canDash = true;
     bool dashed;
@@ -78,6 +79,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject bloodSpurt;
     [SerializeField] float hitFlashSpeed;
 
+    [Space(5)]
+    [Header("힐 스펠 설정")]
+    float healTimer;
+    [SerializeField] float timeToHeal;
+
+
     // 플레이어 체력 처리할 델리게이트
     public delegate void OnHealthChangedDelegate();
     [HideInInspector] public OnHealthChangedDelegate onHealthChangedCallback;
@@ -90,14 +97,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float manaGain;
 
 
-
-
     [Space(5)]
     [Header("플레이어 반동")]
     [SerializeField] float recoilForce;
     [SerializeField] float recoilTime;
 
-    
+
+    [Space(5)]
+    [Header("스펠 설정")]
+
+
 
     public static PlayerController Instance;
 
@@ -124,7 +133,7 @@ public class PlayerController : MonoBehaviour
         {
             if (health != value)
             {
-                health = Mathf.Clamp(health,0,maxHealth);
+                health = Mathf.Clamp(value,0,maxHealth);
 
                 if (onHealthChangedCallback != null)
                 {
@@ -137,13 +146,13 @@ public class PlayerController : MonoBehaviour
     {
         get
         {
-            return Mana;
+            return mana;
         }
         set
         {
             if (mana != value)
             {
-                mana = Mathf.Clamp(mana,0,1);
+                mana = Mathf.Clamp(value,0,1);
                 manaStorage.fillAmount = Mana;
             }
         }
@@ -155,6 +164,7 @@ public class PlayerController : MonoBehaviour
     {
         rig = GetComponent<Rigidbody2D>();
         pState = GetComponent<PlayerStateList>();
+        cast = GetComponent<Casting>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
 
@@ -173,9 +183,18 @@ public class PlayerController : MonoBehaviour
         ActiveFlip();
         ActiveAttack();
         ActiveDodge();
-        FlashWhileInvincible();
+        RestoreTimeScale();
+        UpdateJumpAction();
+        Heal();
+        ActiveCasting();
+        
     }
-
+    private void FixedUpdate()
+    {
+        if (pState.dashing) return;
+        FlashWhileInvincible();
+        Recoil();        
+    }
     // 플레이어 입력 인식에 관한 처리
     void GetInput()
     {
@@ -186,7 +205,7 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isJump", !Grounded());
 
         // C 키를 입력받고, 최대 점프수가 0보다 크거나 플레이어가 땅에 닿아있다면
-        if (Input.GetKeyDown(KeyCode.C) && (jumpCurrent > 0 || Grounded()))
+        if (Input.GetKeyDown(KeyCode.C) && (jumpCurrent > 0 || !pState.jumping))
         {
             jumpCurrent--;
             ActiveJump();
@@ -234,12 +253,17 @@ public class PlayerController : MonoBehaviour
     // 플레이어 점프 메서드
     void ActiveJump()
     {
+        // 플레이어 상태 점프중
+        pState.jumping = true;
         // x 이동값은 유지한채 설정한 점프력 값만큼 y축으로 이동
-        rig.velocity = new Vector2(rig.velocity.x, jumpForce);
-
+        rig.velocity = new Vector2(rig.velocity.x, jumpForce);        
+    }
+    void UpdateJumpAction()
+    {
         // 만약 땅에 닿아있다면 점프 가능수 = 최대 점프 수와 같게 설정
         if (Grounded())
         {
+            pState.jumping = false;
             jumpCurrent = jumpExtra;
         }
     }
@@ -398,22 +422,6 @@ public class PlayerController : MonoBehaviour
         pState.recoilingY = false;
     }
 
-    // 플레이어가 피격 시 느려진 시간을 다시 되돌리는 메서드 구현중
-    void RestoreTimeScale()
-    {
-        if (restoreTime)
-        {
-            if (Time.timeScale < 1)
-            {
-                Time.timeScale += Time.deltaTime * restoreTimeSpeed;
-            }
-            else
-            {
-                Time.timeScale = 1;
-                restoreTime = false;
-            }
-        }
-    }
 
     //플레이어 피격 시 체력 감소 처리
     public void TakeDamage(float _damage)
@@ -422,7 +430,19 @@ public class PlayerController : MonoBehaviour
         Health -= Mathf.RoundToInt(_damage);
         // 데미지가 충돌 프레임마다 계속 적용되지않도록 코루틴 실행
         StartCoroutine(StopTakingDamage());
+        anim.SetTrigger("isHit");
+        if (Health <= 0)
+        {
+            ActiveDeath();
+        }
         Debug.Log(health);
+    }
+
+    // 플레이어 사망 시 메서드
+    void ActiveDeath()
+    {
+        Debug.Log("플레이어 사망");
+        anim.SetBool("isDeath",Health <= 0);
     }
 
     // 피격 처리에 일정 시간을 주기위한 코루틴
@@ -449,6 +469,22 @@ public class PlayerController : MonoBehaviour
         sr.material.color = pState.invincible ? Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time * hitFlashSpeed, 1.0f)) : Color.white;
     }
 
+    // 플레이어가 피격 시 느려진 시간을 다시 되돌리는 메서드 구현중
+    void RestoreTimeScale()
+    {
+        if (restoreTime)
+        {
+            if (Time.timeScale < 1)
+            {
+                Time.timeScale += Time.deltaTime * restoreTimeSpeed;
+            }
+            else
+            {
+                Time.timeScale = 1;
+                restoreTime = false;
+            }
+        }
+    }
     // 플레이어 피격시 시간이 느려지게끔 하는 메서드
     // 구현중
     public void HitStopTime(float _newTimeScale, int _restoreSpeed, float _delay)
@@ -543,4 +579,55 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    ///<summary>
+    /// 스펠, 기술 메서드
+    ///</summary>
+    /// 별도의 이펙트 가져다가 추가하기.
+    /// 
+
+
+    void Heal()
+    {
+        if (Input.GetKey(KeyCode.V) && !pState.dashing && !pState.jumping && health < maxHealth)
+        {
+            pState.healing = true;
+            anim.SetBool("isHeal", true);
+
+
+            healTimer += Time.deltaTime;
+            if (healTimer >= timeToHeal)
+            {
+                Health++;
+                healTimer = 0;
+            }
+        }
+        else
+        {
+            pState.healing = false;
+            anim.SetBool("isHeal", false);
+            healTimer = 0;
+        }   
+    }
+    void ActiveCasting()
+    {
+        if (Input.GetKeyDown(KeyCode.A) && !pState.dashing && !pState.casting)
+        {
+            pState.casting = true;
+            cast.TimeToCasting();
+            
+        }
+        else if (Input.GetKeyDown(KeyCode.A) && pState.casting)
+        {
+            // 캐스팅 중지
+            pState.casting = false;
+            cast.CancelCasting();
+            
+        }
+
+        if (pState.casting && Input.GetKeyDown(KeyCode.S))
+        {
+            // 스펠 사용
+        }
+    }
 }

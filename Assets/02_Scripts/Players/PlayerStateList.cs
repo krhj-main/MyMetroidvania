@@ -12,4 +12,7 @@ public class PlayerStateList : MonoBehaviour
     public bool invincible;             // 피격 시 무적상태 여부
     public bool recoilingX;             // X축 반동 실행 여부
     public bool recoilingY;             // Y축 반동 실행 여부
+    public bool jumping;                // 점프중인 상태 여부
+    public bool healing;                // 힐 스펠 상태 여부
+    public bool casting;                // 스펠 사용위해 캐스팅 중 여부
 }

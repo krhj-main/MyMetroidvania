@@ -16,11 +16,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float damage;
 
     protected float recoilTimer;
-    protected Rigidbody2D rigid;
+    protected Rigidbody2D rig;
 
     protected virtual void Start()
     {
-        rigid = GetComponent<Rigidbody2D>();
+        
+    }
+    protected virtual void Awake()
+    {
+        rig = GetComponent<Rigidbody2D>();
         player = PlayerController.Instance;
     }
     // Start is called before the first frame update
@@ -53,7 +57,7 @@ public class Enemy : MonoBehaviour
 
         if (!isRecoiling)
         {
-            rigid.AddForce(-_hitForce * _hitDirection * recoilFactor);
+            rig.AddForce(-_hitForce * _hitDirection * recoilFactor);
         }
     }
 
