@@ -150,6 +150,9 @@ MonoBehaviour:
   lookRight: 0
   attacking: 0
   dashing: 0
+  invincible: 0
+  recoilingX: 0
+  recoilingY: 0
 --- !u!114 &6292546237278126674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82815f54ffb6fde4cb8f26c3c5084898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pState: {fileID: 0}
   moveSpeed: 5
   jumpForce: 8
   jumpExtra: 5
@@ -178,12 +182,29 @@ MonoBehaviour:
   playerAttackSpeed: 0
   playerAttackCooltime: 0.47
   attackActiveTime: 0.2
+  slashEffect: {fileID: 0}
+  timeBetweenAttack: 0
+  recoilingXSteps: 5
+  recoilingYSteps: 5
+  recoilXSpeed: 100
+  recoilYSpeed: 100
   XAttack: {fileID: 8925582608337769895}
   UpAttack: {fileID: 8582741192231454063}
   DownAttack: {fileID: 8570795711102656453}
   XAttackArea: {x: 2.63, y: 2.91}
   UpAttackArea: {x: 2.2, y: 4}
   DownAttackArea: {x: 2.2, y: 4}
+  attackablekLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  maxHealth: 10
+  health: 0
+  bloodSpurt: {fileID: 1628341410758335220, guid: a20578ed71b48dc48ba276ee44fbdadc, type: 3}
+  hitFlashSpeed: 0
+  manaStorage: {fileID: 0}
+  mana: 0
+  manaDrainSpeed: 0
+  manaGain: 0
   recoilForce: 0
   recoilTime: 0
 --- !u!212 &4347072303492325709
