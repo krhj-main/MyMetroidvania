@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -85,7 +86,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float timeToHeal;
 
 
-    // 플레이어 체력 처리할 델리게이트
+    // 플레이어 체력 증감 처리할 델리게이트
     public delegate void OnHealthChangedDelegate();
     [HideInInspector] public OnHealthChangedDelegate onHealthChangedCallback;
 
@@ -105,7 +106,25 @@ public class PlayerController : MonoBehaviour
 
     [Space(5)]
     [Header("스펠 설정")]
+    [SerializeField] float spell_Fireball_Damage;
+    [SerializeField] float spell_Fireball_Speed;
+    [SerializeField] float spell_Fireball_LifeTime;
 
+    [SerializeField] int[] spell_Damage;
+    [SerializeField] float[] spell_Speed;
+    [SerializeField] float[] spell_LifeTime;
+
+    enum Spell
+    {
+        FIREBALL,
+        FIREBOMB,
+        FIRESPRAY,
+    }
+    Spell spell_Idx;
+    GameObject useSpell;
+    int maxSpell;
+    int currentSpell = 0;
+    
 
 
     public static PlayerController Instance;
@@ -119,6 +138,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         health = maxHealth;
     }
@@ -167,6 +187,7 @@ public class PlayerController : MonoBehaviour
         cast = GetComponent<Casting>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        maxSpell = Enum.GetValues(typeof(Spell)).Length;
 
         gravity = rig.gravityScale;
 
@@ -625,9 +646,53 @@ public class PlayerController : MonoBehaviour
             
         }
 
+        if (pState.casting && Input.GetKeyDown(KeyCode.D))
+        {
+            ChooseSpell();
+        }
+
         if (pState.casting && Input.GetKeyDown(KeyCode.S))
         {
+            int _dir = pState.lookRight ? 1 : -1;
+            spell_Idx = (Spell)currentSpell;
             // 스펠 사용
+            switch (spell_Idx)
+            {
+                case Spell.FIREBALL:
+                    Debug.Log("1 스펠 사용");
+                    useSpell = Fireball();
+                    break;
+
+                case Spell.FIREBOMB:
+                    Debug.Log("2 스펠 사용");
+                    break;
+
+                case Spell.FIRESPRAY:
+                    Debug.Log("3 스펠 사용");
+                    break;
+            }
+            StartCoroutine(ShootProjectile(useSpell, _dir, spell_LifeTime[(int)spell_Idx]));
         }
     }
+    void ChooseSpell()
+    {
+        currentSpell++;
+        currentSpell %= maxSpell;
+    }
+    GameObject Fireball()
+    {
+        GameObject fireball = Instantiate(Resources.Load<GameObject>("Prefabs/Spell/Fireball"));
+        fireball.transform.position = transform.position;
+        return fireball;
+    }
+    IEnumerator ShootProjectile(GameObject _go,int _dir,float _lifeTime)
+    {
+        while (_lifeTime <= 0)
+        {
+            _lifeTime -= Time.deltaTime;
+            _go.transform.position += new Vector3(_dir * spell_Fireball_Speed, 0, 0);
+        }
+        yield return null;
+    }
+
 }

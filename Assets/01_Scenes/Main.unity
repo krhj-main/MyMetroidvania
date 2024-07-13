@@ -6795,24 +6795,40 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6292546237278126674, guid: 281101f58d69d1c46865bd04d4e30536, type: 3}
+      propertyPath: dodgeSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292546237278126674, guid: 281101f58d69d1c46865bd04d4e30536, type: 3}
       propertyPath: manaStorage
       value: 
       objectReference: {fileID: 8622826526081462514}
     - target: {fileID: 6292546237278126674, guid: 281101f58d69d1c46865bd04d4e30536, type: 3}
       propertyPath: recoilXSpeed
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6292546237278126674, guid: 281101f58d69d1c46865bd04d4e30536, type: 3}
       propertyPath: recoilYSpeed
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6292546237278126674, guid: 281101f58d69d1c46865bd04d4e30536, type: 3}
       propertyPath: recoilingXSteps
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6292546237278126674, guid: 281101f58d69d1c46865bd04d4e30536, type: 3}
       propertyPath: recoilingYSteps
-      value: 3
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292546237278126674, guid: 281101f58d69d1c46865bd04d4e30536, type: 3}
+      propertyPath: spell_Fireball_Speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292546237278126674, guid: 281101f58d69d1c46865bd04d4e30536, type: 3}
+      propertyPath: spell_Fireball_Damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6292546237278126674, guid: 281101f58d69d1c46865bd04d4e30536, type: 3}
+      propertyPath: spell_Fireball_LifeTime
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6967819503142597365, guid: 281101f58d69d1c46865bd04d4e30536, type: 3}
       propertyPath: m_RootOrder
