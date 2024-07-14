@@ -4,6 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
+
+[System.Serializable]
+public class SpellSetting
+{
+    public int spell_Damage;
+    public float spell_Speed;
+    public float spell_LifeTime;
+    public float spell_recoilForce;
+    public Vector2 spell_Range;
+    public LayerMask spell_AttackablekLayer;
+    public int spell_HitLimit;
+}
+
 public class PlayerController : MonoBehaviour
 {
     Vector2 moveAxis;
@@ -110,9 +123,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float spell_Fireball_Speed;
     [SerializeField] float spell_Fireball_LifeTime;
 
-    [SerializeField] int[] spell_Damage;
-    [SerializeField] float[] spell_Speed;
-    [SerializeField] float[] spell_LifeTime;
+    
+
+    
 
     enum Spell
     {
@@ -660,7 +673,7 @@ public class PlayerController : MonoBehaviour
             {
                 case Spell.FIREBALL:
                     Debug.Log("1 ½ºÆç »ç¿ë");
-                    useSpell = Fireball();
+                    useSpell = Fireball(_dir);
                     break;
 
                 case Spell.FIREBOMB:
@@ -671,7 +684,6 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("3 ½ºÆç »ç¿ë");
                     break;
             }
-            StartCoroutine(ShootProjectile(useSpell, _dir, spell_LifeTime[(int)spell_Idx]));
         }
     }
     void ChooseSpell()
@@ -679,20 +691,11 @@ public class PlayerController : MonoBehaviour
         currentSpell++;
         currentSpell %= maxSpell;
     }
-    GameObject Fireball()
+    GameObject Fireball(int _dir)
     {
         GameObject fireball = Instantiate(Resources.Load<GameObject>("Prefabs/Spell/Fireball"));
         fireball.transform.position = transform.position;
+        fireball.transform.localScale = new Vector3(_dir * fireball.transform.localScale.x, fireball.transform.localScale.y, fireball.transform.localScale.z);
         return fireball;
     }
-    IEnumerator ShootProjectile(GameObject _go,int _dir,float _lifeTime)
-    {
-        while (_lifeTime <= 0)
-        {
-            _lifeTime -= Time.deltaTime;
-            _go.transform.position += new Vector3(_dir * spell_Fireball_Speed, 0, 0);
-        }
-        yield return null;
-    }
-
 }

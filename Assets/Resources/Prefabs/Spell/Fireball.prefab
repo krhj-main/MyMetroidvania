@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8657683559682610105}
+  - component: {fileID: 3002182478723341327}
   - component: {fileID: 1207063149091330699}
   - component: {fileID: 776288851277821941}
   - component: {fileID: 6543537347364193533}
@@ -34,6 +35,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3002182478723341327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041485689916799916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49124f4f3fb6444da47d666c2a0753f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireball:
+    spell_Damage: 30
+    spell_Speed: 5
+    spell_LifeTime: 2
+    spell_recoilForce: 10
+    spell_Range: {x: 0, y: 0}
+    spell_AttackablekLayer:
+      serializedVersion: 2
+      m_Bits: 1024
+    spell_HitLimit: 5
 --- !u!95 &1207063149091330699
 Animator:
   serializedVersion: 5
@@ -93,8 +116,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1907978933
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 3400313260025505526, guid: 9d6eca86a6d53eb49bfe9eb3c425230a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
     public virtual void EnemyHit(float _damageDone, Vector2 _hitDirection, float _hitForce)
     {
         health -= _damageDone;
-        Debug.Log(health);
+        //Debug.Log(health);
 
         if (!isRecoiling)
         {
