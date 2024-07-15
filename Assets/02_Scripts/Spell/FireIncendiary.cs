@@ -11,6 +11,7 @@ public class FireIncendiary : Spell
     protected override void Start()
     {
         player = PlayerController.Instance;
+        spellOption.spell_XTransform = GameObject.Find("XSpell").transform;
     }
 
     // Update is called once per frame
@@ -20,16 +21,21 @@ public class FireIncendiary : Spell
     }
     private void FixedUpdate()
     {
-        int dir = PlayerController.Instance.pState.lookRight ? 1 : -1;
-        transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z) +
-                            new Vector3(offSet.x * dir, offSet.y, offSet.z);
-        transform.localScale = new Vector3(transform.localScale.x * dir, transform.localScale.y, transform.localScale.z);
+        transform.position = spellOption.spell_XTransform.position;
+        if (PlayerController.Instance.pState.lookRight)
+        {
+            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
+        else //if(!PlayerController.Instance.pState.lookRight)
+        {
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        }
     }
     protected override void OnDrawGizmos()
     {
         if (!debugging) return;
         Gizmos.color = Color.red;
-        Gizmos.DrawCube(PlayerController.Instance.transform.position + offSet,area);
+        Gizmos.DrawCube(spellOption.spell_XTransform.position,area);
         //Gizmos.DrawCube(transform.position + offSet,area);
     }
     protected override void Hit(Vector2 _attackArea, float _radius, float _recoilStrength)

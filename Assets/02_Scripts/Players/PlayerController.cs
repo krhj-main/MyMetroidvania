@@ -16,13 +16,17 @@ public class SpellSetting
     public float spell_radius;
     public LayerMask spell_AttackablekLayer;
     public int spell_HitLimit;
+
+    public Transform spell_XTransform;
 }
 
 public class PlayerController : MonoBehaviour
 {
-    Vector2 moveAxis;
+    [HideInInspector]
+    public Vector2 moveAxis;
     Rigidbody2D rig;
     Animator anim;
+    [HideInInspector]
     public PlayerStateList pState;
     Casting cast;
     float gravity;
@@ -118,11 +122,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float recoilTime;
 
 
-    [Space(5)]
-    [Header("½ºÆç ¼³Á¤")]
-    [SerializeField] float spell_Fireball_Damage;
-    [SerializeField] float spell_Fireball_Speed;
-    [SerializeField] float spell_Fireball_LifeTime;
+    
 
     
 
@@ -710,9 +710,8 @@ public class PlayerController : MonoBehaviour
     }
     GameObject FireIncendiary(int _dir)
     {
-        GameObject bomb = Instantiate(Resources.Load<GameObject>("Prefabs/Spell/FireIncendiary"));
-        bomb.transform.position = transform.position;
-        bomb.transform.localScale = new Vector3(_dir * bomb.transform.localScale.x, bomb.transform.localScale.y, bomb.transform.localScale.z);
-        return bomb;
+        GameObject incendiary = Instantiate(Resources.Load<GameObject>("Prefabs/Spell/FireIncendiary"));
+        incendiary.transform.position = transform.position;
+        return incendiary;
     }
 }
