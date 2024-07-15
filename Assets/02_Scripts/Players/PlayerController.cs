@@ -13,6 +13,7 @@ public class SpellSetting
     public float spell_LifeTime;
     public float spell_recoilForce;
     public Vector2 spell_Range;
+    public float spell_radius;
     public LayerMask spell_AttackablekLayer;
     public int spell_HitLimit;
 }
@@ -678,10 +679,12 @@ public class PlayerController : MonoBehaviour
 
                 case Spell.FIREBOMB:
                     Debug.Log("2 ½ºÆç »ç¿ë");
+                    useSpell = FireBomb(_dir);
                     break;
 
                 case Spell.FIRESPRAY:
                     Debug.Log("3 ½ºÆç »ç¿ë");
+                    useSpell = FireIncendiary(_dir);
                     break;
             }
         }
@@ -697,5 +700,19 @@ public class PlayerController : MonoBehaviour
         fireball.transform.position = transform.position;
         fireball.transform.localScale = new Vector3(_dir * fireball.transform.localScale.x, fireball.transform.localScale.y, fireball.transform.localScale.z);
         return fireball;
+    }
+    GameObject FireBomb(int _dir)
+    {
+        GameObject bomb = Instantiate(Resources.Load<GameObject>("Prefabs/Spell/FireBomb"));
+        bomb.transform.position = transform.position;
+        bomb.transform.localScale = new Vector3(_dir * bomb.transform.localScale.x, bomb.transform.localScale.y, bomb.transform.localScale.z);
+        return bomb;
+    }
+    GameObject FireIncendiary(int _dir)
+    {
+        GameObject bomb = Instantiate(Resources.Load<GameObject>("Prefabs/Spell/FireIncendiary"));
+        bomb.transform.position = transform.position;
+        bomb.transform.localScale = new Vector3(_dir * bomb.transform.localScale.x, bomb.transform.localScale.y, bomb.transform.localScale.z);
+        return bomb;
     }
 }

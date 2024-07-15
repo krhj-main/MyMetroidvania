@@ -204,8 +204,8 @@ TextureImporter:
         y: 0
         width: 96
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -225,8 +225,8 @@ TextureImporter:
         y: 0
         width: 96
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -246,8 +246,8 @@ TextureImporter:
         y: 0
         width: 96
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -267,8 +267,8 @@ TextureImporter:
         y: 0
         width: 96
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -288,8 +288,8 @@ TextureImporter:
         y: 0
         width: 96
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -309,8 +309,8 @@ TextureImporter:
         y: 0
         width: 96
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -330,8 +330,8 @@ TextureImporter:
         y: 0
         width: 96
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -351,8 +351,8 @@ TextureImporter:
         y: 0
         width: 96
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.8}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -360,6 +360,27 @@ TextureImporter:
       bones: []
       spriteID: 0dac22158f1dfbe80800000000000000
       internalID: -8160573135328720176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire_Bomb_Start_96x48_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 755
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7da7b069f85b5a045859291c9fff384c
+      internalID: 161490852
       vertices: []
       indices: 
       edges: []
@@ -383,6 +404,7 @@ TextureImporter:
       Fire_Bomb_Start_96x48_5: -1990679098388441870
       Fire_Bomb_Start_96x48_6: 7198977546351670056
       Fire_Bomb_Start_96x48_7: -8160573135328720176
+      Fire_Bomb_Start_96x48_8: 161490852
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
