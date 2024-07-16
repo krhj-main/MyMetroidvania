@@ -55,11 +55,12 @@ MonoBehaviour:
     spell_LifeTime: 5
     spell_recoilForce: 80
     spell_Range: {x: 0, y: 0}
-    spell_radius: 0.97
+    spell_radius: 10
     spell_AttackablekLayer:
       serializedVersion: 2
       m_Bits: 1024
-    spell_HitLimit: 10
+    spell_HitLimit: 3
+    spell_XTransform: {fileID: 0}
 --- !u!212 &1815635846769369034
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -98,9 +99,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1907978933
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 8853516206920803942, guid: 975bd06b56232d147a3303415a5fb328, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

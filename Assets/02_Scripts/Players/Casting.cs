@@ -45,15 +45,4 @@ public class Casting : MonoBehaviour
             yield return new WaitForSeconds(appearTime);
         }
     }
-
-    IEnumerator SpellDesappearTime()
-    {
-        while (castingCount < fireball.Length)
-        {
-            Debug.Log($"castingCount{castingCount}");
-            fireball[castingCount].SetActive(false);
-            castingCount++;
-            yield return new WaitForSeconds(appearTime);
-        }
-    }
 }

@@ -28,7 +28,5 @@ public class Zombie : Enemy
     public  override void EnemyHit(float _damageDone, Vector2 _hitDirection, float _hitForce)
     {
         base.EnemyHit(_damageDone, _hitDirection, _hitForce);
-
-
     }
 }

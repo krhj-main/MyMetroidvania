@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     float restoreTimeSpeed;
 
     SpriteRenderer sr;
+    BoxCollider2D col;
 
 
 
@@ -133,6 +134,7 @@ public class PlayerController : MonoBehaviour
         FIREBALL,
         FIREBOMB,
         FIRESPRAY,
+        FIREMETEOR,
     }
     Spell spell_Idx;
     GameObject useSpell;
@@ -202,6 +204,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         maxSpell = Enum.GetValues(typeof(Spell)).Length;
+        col = GetComponent<BoxCollider2D>();
 
         gravity = rig.gravityScale;
 
@@ -212,6 +215,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (pState.cutscene) return;
         GetInput();
         if (pState.dashing) return;
         ActiveMove();
@@ -226,6 +230,7 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (pState.cutscene) return;
         if (pState.dashing) return;
         FlashWhileInvincible();
         Recoil();        
@@ -330,7 +335,12 @@ public class PlayerController : MonoBehaviour
         // 플레이어 상태 대쉬 중으로 변경
         pState.dashing = true;
         // 대쉬 중에 중력의 영향을 받지 않게 일시적으로 중력값 0으로 변경
+
+        gameObject.layer = 7;
+        gameObject.tag = "InvinciblePlayer";
+        // 대쉬중에는 공격받지 않고 몬스터를 통과하게끔 트리거로 바꾸고
         rig.gravityScale = 0;
+        
         // 땅에 닿아있고 이동 y축값이 0과 같거나 크면 구르기 실행
         if (Grounded() && moveAxis.y >= 0)
         {
@@ -355,6 +365,9 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(dodgeCoolTime);
         // 대쉬가 다시 가능하게끔 true로 변경
         canDash = true;
+        gameObject.layer = 6;
+        gameObject.tag = "Player";
+        // 다시 몬스터와 충돌되게 트리거를 해제
     }
 
     // 플레이어가 땅에있는지 아닌지 판별하는 메서드
@@ -614,6 +627,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public IEnumerator WalkIntoNewScene(Vector2 _exitDir, float _delay)
+    {
+        if (_exitDir.y > 0)
+        {
+            rig.velocity = jumpForce * _exitDir;
+        }
+
+        if (_exitDir.x != 0)
+        {
+            moveAxis.x = _exitDir.x > 0 ? 1 : -1;
+
+            ActiveMove();
+        }
+
+        ActiveFlip();
+        yield return new WaitForSeconds(_delay);
+        pState.cutscene = false;
+    }
+
 
     ///<summary>
     /// 스펠, 기술 메서드
@@ -648,6 +680,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A) && !pState.dashing && !pState.casting)
         {
+            Debug.Log("cast");
             pState.casting = true;
             cast.TimeToCasting();
             
@@ -655,6 +688,7 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.A) && pState.casting)
         {
             // 캐스팅 중지
+            Debug.Log("cast cancle");
             pState.casting = false;
             cast.CancelCasting();
             
@@ -686,6 +720,11 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("3 스펠 사용");
                     useSpell = FireIncendiary(_dir);
                     break;
+                case Spell.FIREMETEOR:
+                    Debug.Log("4 스펠 사용");
+                    useSpell = FireMeteor(_dir);
+                    break;
+
             }
         }
     }
@@ -693,9 +732,11 @@ public class PlayerController : MonoBehaviour
     {
         currentSpell++;
         currentSpell %= maxSpell;
+        Debug.Log($"{currentSpell+1} 번 스펠 선택");
     }
     GameObject Fireball(int _dir)
     {
+        Mana -= 0.1f;
         GameObject fireball = Instantiate(Resources.Load<GameObject>("Prefabs/Spell/Fireball"));
         fireball.transform.position = transform.position;
         fireball.transform.localScale = new Vector3(_dir * fireball.transform.localScale.x, fireball.transform.localScale.y, fireball.transform.localScale.z);
@@ -703,6 +744,7 @@ public class PlayerController : MonoBehaviour
     }
     GameObject FireBomb(int _dir)
     {
+        Mana -= 0.3f;
         GameObject bomb = Instantiate(Resources.Load<GameObject>("Prefabs/Spell/FireBomb"));
         bomb.transform.position = transform.position;
         bomb.transform.localScale = new Vector3(_dir * bomb.transform.localScale.x, bomb.transform.localScale.y, bomb.transform.localScale.z);
@@ -710,8 +752,17 @@ public class PlayerController : MonoBehaviour
     }
     GameObject FireIncendiary(int _dir)
     {
+        Mana -= 0.3f;
         GameObject incendiary = Instantiate(Resources.Load<GameObject>("Prefabs/Spell/FireIncendiary"));
         incendiary.transform.position = transform.position;
         return incendiary;
     }
+    GameObject FireMeteor(int _dir)
+    {
+        Mana -= 0.7f;
+        GameObject meteor = Instantiate(Resources.Load<GameObject>("Prefabs/Spell/FireMeteor"));
+        meteor.transform.position = transform.position;
+        return meteor;
+    }
+
 }

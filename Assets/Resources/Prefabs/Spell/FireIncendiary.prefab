@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6648288931600741099}
   - component: {fileID: 3053544746609341450}
   - component: {fileID: -6932717060330185364}
+  - component: {fileID: 8982448849442820162}
   m_Layer: 0
   m_Name: FireIncendiary
   m_TagString: Untagged
@@ -49,18 +50,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugging: 1
   spellOption:
-    spell_Damage: 0
+    spell_Damage: 5
     spell_Speed: 0
-    spell_LifeTime: 0
-    spell_recoilForce: 0
+    spell_LifeTime: 5
+    spell_recoilForce: 5
     spell_Range: {x: 0, y: 0}
     spell_radius: 0
     spell_AttackablekLayer:
       serializedVersion: 2
       m_Bits: 1024
-    spell_HitLimit: 0
+    spell_HitLimit: 5
+    spell_XTransform: {fileID: 0}
   area: {x: 4.9, y: 1.34}
-  offSet: {x: 3.2, y: 0.2, z: 0}
 --- !u!212 &6648288931600741099
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -99,9 +100,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1907978933
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: -5564397493214910013, guid: f5246608584596f45a9a22eb0f3cf0a6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -146,3 +147,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97163edcfd40c644abc13fe761909d2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &8982448849442820162
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959378653893388288}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.010893583, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 0.6666667}
+    newSize: {x: 2, y: 0.6666667}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.6514018, y: 0.6666667}
+  m_EdgeRadius: 0
