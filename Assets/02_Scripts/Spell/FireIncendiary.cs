@@ -6,7 +6,7 @@ public class FireIncendiary : Spell
 {
     [SerializeField] Vector2 area;
     PlayerController player;
-    protected Collider2D[] hitSize;
+    protected new Collider2D[] hitSize;
     // Start is called before the first frame update
     protected override void Start()
     {

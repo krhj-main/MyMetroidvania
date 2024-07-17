@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,22 @@ public class Enemy : MonoBehaviour
     protected float recoilTimer;
     protected Rigidbody2D rig;
 
+    protected enum EnemyStates
+    {
+        // 크라울러
+        Crawler_Idle,
+        Crawler_Flip,
+
+
+        // 박쥐
+        Bat_Idle,
+        Bat_Chase,
+        Bat_Stunned,
+        Bat_Death,
+
+
+    }
+    protected EnemyStates currnetEnemyState;
     protected virtual void Start()
     {
         
@@ -32,6 +49,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+        UpdateEnemyStates();
+
         if (health <= 0)
         {
             Destroy(gameObject);
@@ -50,6 +69,16 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+
+    protected virtual void UpdateEnemyStates()
+    {
+        
+    }
+    protected void ChangeState(EnemyStates _newState)
+    {
+        currnetEnemyState = _newState;
+    }
+
     public virtual void EnemyHit(float _damageDone, Vector2 _hitDirection, float _hitForce)
     {
         health -= _damageDone;
@@ -66,7 +95,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
         {
             Attack();
-            PlayerController.Instance.HitStopTime(0, 5, 0.5f);
+            PlayerController.Instance.HitStopTime(0f, 5, 0.5f);
         }
     }
     protected virtual void Attack()

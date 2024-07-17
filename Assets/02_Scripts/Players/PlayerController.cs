@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     bool dashed;
     bool restoreTime;
     float restoreTimeSpeed;
+    bool canFlash = true;
 
     SpriteRenderer sr;
     BoxCollider2D col;
@@ -510,11 +511,33 @@ public class PlayerController : MonoBehaviour
     }
 
     // 무적시간동안 플레이어가 무적중인지 확인 될 수 있도록하는 메서드
-    // 구현중
+    IEnumerator Flash()
+    {
+        Debug.Log("Flash");
+        sr.enabled = !sr.enabled;
+        canFlash = false;
+        yield return new WaitForSeconds(0.15f);
+        canFlash = true;
+    }
+
     void FlashWhileInvincible()
     {
         // 플레이어 스프라이트의 색깔을 무적시간동안에는 깜빡이게끔 하여 표시시킴
-        sr.material.color = pState.invincible ? Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time * hitFlashSpeed, 1.0f)) : Color.white;
+        //sr.material.color = pState.invincible ? Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time * hitFlashSpeed, 1.0f)) : Color.white;
+
+        if (pState.invincible && !pState.cutscene)
+        {
+            Debug.Log("Test1");
+            if (Time.timeScale > 0.2 && canFlash)
+            {
+                Debug.Log("Test2");
+                StartCoroutine(Flash());
+            }
+        }
+        else
+        {
+            sr.enabled = true;
+        }
     }
 
     // 플레이어가 피격 시 느려진 시간을 다시 되돌리는 메서드 구현중
@@ -629,6 +652,7 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator WalkIntoNewScene(Vector2 _exitDir, float _delay)
     {
+        pState.invincible = true;
         if (_exitDir.y > 0)
         {
             rig.velocity = jumpForce * _exitDir;
@@ -643,6 +667,7 @@ public class PlayerController : MonoBehaviour
 
         ActiveFlip();
         yield return new WaitForSeconds(_delay);
+        pState.invincible = false;
         pState.cutscene = false;
     }
 

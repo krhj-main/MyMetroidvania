@@ -30,6 +30,8 @@ public class SceneTransition : MonoBehaviour
             GM.Instance.transitionedFromScene = SceneManager.GetActiveScene().name;
 
             PlayerController.Instance.pState.cutscene = true;
+            PlayerController.Instance.pState.invincible = true;
+
 
              StartCoroutine(UIManager.Instance.sceneFader.FadeAndLoadScene(SceneFader.FadeDirection.In, transitionTo));
         }

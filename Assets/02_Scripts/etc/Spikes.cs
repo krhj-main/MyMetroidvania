@@ -24,10 +24,11 @@ public class Spikes : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D _col)
     {
         // 플레이어가 충돌 되었을 때
-        if (_col.gameObject.CompareTag("Player"))
+        if (_col.gameObject.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
         {
             // 플레이어의 피격 시 메서드 호출
             PlayerController.Instance.TakeDamage(spikesDamage);
+            PlayerController.Instance.HitStopTime(0, 5, 0.5f);
         }
     }
 }
