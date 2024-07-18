@@ -29,12 +29,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4735619601361252968}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.41, y: -0.72, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.3379157, y: 1.3379157, z: 1.3379157}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2660018434847485870
 MonoBehaviour:
@@ -48,15 +48,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839d565068b7a864b8a799f1a1bb2a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 99999
-  recoilLength: 1
+  health: 100
+  recoilLength: 5
   recoilFactor: 5
   isRecoiling: 0
   player: {fileID: 0}
-  speed: 1
+  speed: 2
   damage: 1
-  flipWaitTIme: 1
-  ledgeCheckX: 1.2
+  blood: {fileID: 6560240633346726401, guid: cc5305c3a60ce594ea99360161c15d47, type: 3}
+  currnetEnemyState: 0
+  flipWaitTime: 1
+  ledgeCheckX: 2
   ledgeCheckY: 1
   groundLayer:
     serializedVersion: 2
@@ -172,18 +174,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.062125206, y: -0.5218482}
+  m_Offset: {x: 0.00060769916, y: 0.44369313}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 4}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.1875, y: 0.875}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1739483, y: 0.9563036}
+  m_Size: {x: 1.1794045, y: 0.8690229}
   m_EdgeRadius: 0
 --- !u!95 &2474257467206912786
 Animator:

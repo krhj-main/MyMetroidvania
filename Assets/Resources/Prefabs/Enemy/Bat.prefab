@@ -9,9 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7589229693118202961}
+  - component: {fileID: -4241699035039263461}
   - component: {fileID: 3343925379885835859}
   - component: {fileID: 3183081977653865339}
   - component: {fileID: 7262686270505997818}
+  - component: {fileID: 2903188262682073214}
+  - component: {fileID: 5442635917225019231}
   m_Layer: 10
   m_Name: Bat
   m_TagString: Enemy
@@ -27,13 +30,35 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 265205993906909144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.88, y: -1.64, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-4241699035039263461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265205993906909144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 975570458e6efe7459d2490a7f12c6a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  recoilLength: 1
+  recoilFactor: 2
+  isRecoiling: 0
+  player: {fileID: 0}
+  speed: 12
+  damage: 1
+  blood: {fileID: 6560240633346726401, guid: 2dfce2bd8ed53df47b2d3cef83f60a7e, type: 3}
+  currnetEnemyState: 0
+  chaseDistance: 5
 --- !u!212 &3343925379885835859
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -74,7 +99,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1907978933
   m_SortingLayer: 2
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 7013631516640934163, guid: 6d56bdbc3062c2e469132b34fef01f98, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -148,3 +173,46 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &2903188262682073214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265205993906909144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 975570458e6efe7459d2490a7f12c6a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  recoilLength: 0
+  recoilFactor: 0
+  isRecoiling: 0
+  player: {fileID: 0}
+  speed: 0
+  damage: 0
+  blood: {fileID: 0}
+  currnetEnemyState: 0
+  chaseDistance: 0
+--- !u!95 &5442635917225019231
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265205993906909144}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b25f0b7c6e654c044b1f30e01e5d0675, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

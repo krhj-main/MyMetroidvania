@@ -15,9 +15,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float speed;
 
     [SerializeField] protected float damage;
+    [SerializeField] protected GameObject blood;
+
 
     protected float recoilTimer;
     protected Rigidbody2D rig;
+    protected SpriteRenderer sr;
+    protected Animator anim;
+
 
     protected enum EnemyStates
     {
@@ -32,9 +37,32 @@ public class Enemy : MonoBehaviour
         Bat_Stunned,
         Bat_Death,
 
+        // Â÷Àú
+        Charger_Idle,
+        Charger_Detect,
+        Charger_Charge,
+
+
 
     }
+    [SerializeField]
     protected EnemyStates currnetEnemyState;
+
+    protected virtual EnemyStates GetCurrentEnemyState
+    {
+        get { return currnetEnemyState; }
+
+        set {
+            if (currnetEnemyState != value)
+            {
+                currnetEnemyState = value;
+
+                ChangeCurrentAnaimation();
+            }
+
+        }
+
+    }
     protected virtual void Start()
     {
         
@@ -42,6 +70,8 @@ public class Enemy : MonoBehaviour
     protected virtual void Awake()
     {
         rig = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
         player = PlayerController.Instance;
     }
     // Start is called before the first frame update
@@ -49,13 +79,6 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        UpdateEnemyStates();
-
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
-
         if (isRecoiling)
         {
             if (recoilTimer < recoilFactor)
@@ -68,15 +91,23 @@ public class Enemy : MonoBehaviour
                 recoilTimer = 0;
             }
         }
+        else
+        {
+            UpdateEnemyStates();
+        }
     }
 
     protected virtual void UpdateEnemyStates()
     {
         
     }
+    protected virtual void ChangeCurrentAnaimation()
+    {
+
+    }
     protected void ChangeState(EnemyStates _newState)
     {
-        currnetEnemyState = _newState;
+        GetCurrentEnemyState = _newState;
     }
 
     public virtual void EnemyHit(float _damageDone, Vector2 _hitDirection, float _hitForce)
@@ -86,18 +117,35 @@ public class Enemy : MonoBehaviour
 
         if (!isRecoiling)
         {
-            rig.AddForce(-_hitForce * _hitDirection * recoilFactor);
+            GameObject _blood = Instantiate(blood, transform.position + (Vector3.up*0.3f), Quaternion.identity);
+            Destroy(_blood, 4f);
+            rig.velocity = _hitForce * _hitDirection * recoilFactor;
         }
     }
 
+
+    protected virtual void Death(float _destroyTime)
+    {
+        Destroy(gameObject,_destroyTime);
+    }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !PlayerController.Instance.pState.invincible)
+        if (collision.gameObject.CompareTag("Player") && !PlayerController.Instance.pState.invincible && health > 0)
         {
             Attack();
-            PlayerController.Instance.HitStopTime(0f, 5, 0.5f);
+
+            if (PlayerController.Instance.pState.alive)
+            {
+                PlayerController.Instance.HitStopTime(0f, 5, 0.5f);
+            }
+            else
+            {
+
+
+            }
+
+            }
         }
-    }
     protected virtual void Attack()
     {
         PlayerController.Instance.TakeDamage(damage);

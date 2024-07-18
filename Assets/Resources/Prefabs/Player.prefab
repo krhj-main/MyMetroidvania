@@ -165,7 +165,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686817970119946895}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.22, y: 0.28, z: 0}
+  m_LocalPosition: {x: 2.79, y: 0.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -277,7 +277,7 @@ Transform:
   - {fileID: 9014374402989749662}
   - {fileID: 8150826093772305948}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3873849380678700305
 MonoBehaviour:
@@ -318,6 +318,7 @@ MonoBehaviour:
   healing: 0
   casting: 0
   cutscene: 0
+  alive: 1
 --- !u!114 &6292546237278126674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,12 +334,12 @@ MonoBehaviour:
   moveAxis: {x: 0, y: 0}
   pState: {fileID: 0}
   moveSpeed: 5
-  jumpForce: 8
+  jumpForce: 12
   jumpExtra: 5
-  dodgeSpeed: 30
+  dodgeSpeed: 35
   dodgeCoolTime: 0.2
   dodgeTime: 0.1
-  Debugging: 1
+  Debugging: 0
   groundChecker: {fileID: 2673570260565918593}
   groundLayer:
     serializedVersion: 2
@@ -350,10 +351,10 @@ MonoBehaviour:
   attackActiveTime: 0.2
   slashEffect: {fileID: 0}
   timeBetweenAttack: 0
-  recoilingXSteps: 5
-  recoilingYSteps: 5
-  recoilXSpeed: 100
-  recoilYSpeed: 100
+  recoilingXSteps: 2
+  recoilingYSteps: 2
+  recoilXSpeed: 30
+  recoilYSpeed: 20
   XAttack: {fileID: 8925582608337769895}
   UpAttack: {fileID: 8582741192231454063}
   DownAttack: {fileID: 8570795711102656453}
@@ -485,7 +486,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08320132, y: 0.008794904}
+  m_Offset: {x: 0.0655798, y: 0.008794904}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -496,7 +497,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5013619, y: 2.340925}
+  m_Size: {x: 0.9595223, y: 2.340925}
   m_EdgeRadius: 0
 --- !u!95 &8337250134774771045
 Animator:

@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     bool restoreTime;
     float restoreTimeSpeed;
     bool canFlash = true;
+    bool openMap = false;
 
     SpriteRenderer sr;
     BoxCollider2D col;
@@ -217,16 +218,25 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (pState.cutscene) return;
-        GetInput();
-        if (pState.dashing) return;
-        ActiveMove();
-        ActiveFlip();
-        ActiveAttack();
-        ActiveDodge();
-        RestoreTimeScale();
-        UpdateJumpAction();
-        Heal();
-        ActiveCasting();
+        if (pState.alive)
+        {
+            GetInput();
+        }
+        
+        if (pState.dashing || pState.healing) return;
+        if (pState.alive)
+        {
+            ActiveMove();
+            ActiveFlip();
+            ActiveAttack();
+            ActiveDodge();
+            RestoreTimeScale();
+            UpdateJumpAction();
+            Heal();
+            ActiveCasting();
+            ToggleMap();
+        }
+        
         
     }
     private void FixedUpdate()
@@ -255,8 +265,23 @@ public class PlayerController : MonoBehaviour
 
         // 공격 X키를 입력받아 불린값에 저장
         isAttack = Input.GetKeyDown(KeyCode.X);
+
+        // 미니맵열기
+        openMap = Input.GetKey(KeyCode.M);
+
         
         
+    }
+    void ToggleMap()
+    {
+        if (openMap)
+        {
+            UIManager.Instance.mapHandler.SetActive(true);
+        }
+        else
+        {
+            UIManager.Instance.mapHandler.SetActive(false);
+        }
     }
 
     // 플레이어 이동 메서드
@@ -270,6 +295,7 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isWalk",moveAxis.x!=0);
     }
 
+    
     // 이동 입력값에 따른 플레이어 좌우 반전
     void ActiveFlip()
     {
@@ -475,23 +501,23 @@ public class PlayerController : MonoBehaviour
     //플레이어 피격 시 체력 감소 처리
     public void TakeDamage(float _damage)
     {
-        // Health 프로퍼티를 통해 체력값을 업데이트
-        Health -= Mathf.RoundToInt(_damage);
-        // 데미지가 충돌 프레임마다 계속 적용되지않도록 코루틴 실행
-        StartCoroutine(StopTakingDamage());
-        anim.SetTrigger("isHit");
-        if (Health <= 0)
+        if (pState.alive)
         {
-            ActiveDeath();
+            // Health 프로퍼티를 통해 체력값을 업데이트
+            Health -= Mathf.RoundToInt(_damage);
+            
+            if (Health <= 0)
+            {
+                anim.SetTrigger("isDeath");
+                StartCoroutine(Death());
+            }
+            else
+            {
+                anim.SetTrigger("isHit");
+                // 데미지가 충돌 프레임마다 계속 적용되지않도록 코루틴 실행
+                StartCoroutine(StopTakingDamage());
+            }
         }
-        Debug.Log(health);
-    }
-
-    // 플레이어 사망 시 메서드
-    void ActiveDeath()
-    {
-        Debug.Log("플레이어 사망");
-        anim.SetBool("isDeath",Health <= 0);
     }
 
     // 피격 처리에 일정 시간을 주기위한 코루틴
@@ -581,7 +607,20 @@ public class PlayerController : MonoBehaviour
         restoreTime = true;
         yield return new WaitForSeconds(_delay);
     }
+    IEnumerator Death()
+    {
+        pState.alive = false;
+        Time.timeScale = 1f;
+        // 피가 흩날리는 파티클 효과를 생성시키고
+        GameObject _bloodSpurtParticles = Instantiate(bloodSpurt, transform.position, Quaternion.identity);
+        // 1.5초 뒤에 파티클 효과 삭제
+        Destroy(_bloodSpurtParticles, 1.5f);
+        
 
+        yield return new WaitForSeconds(0.9f);
+
+        StartCoroutine(UIManager.Instance.ActiveDeathScreen());
+    }
     // 플레이어 공격 실행 메서드
     void ActiveAttack()
     {
@@ -594,8 +633,9 @@ public class PlayerController : MonoBehaviour
             // 땅에 닿아있고 y축 이동값이 0이하라면 
             if (Grounded() && moveAxis.y <= 0)
             {
+                int _recoilLR = pState.lookRight ? 1 : -1;
                 // X축 공격
-                Hit(XAttack, XAttackArea, ref pState.recoilingX, recoilXSpeed);
+                Hit(XAttack, XAttackArea, ref pState.recoilingX, Vector2.right * _recoilLR, recoilXSpeed);
             }
             // y축 이동값이 위를 향한다면
             else if (moveAxis.y > 0)
@@ -612,7 +652,7 @@ public class PlayerController : MonoBehaviour
 
     // 플레이어 공격 범위 처리 메서드
     // 공격 위치 트랜스폼, 공격 범위, 반동의 처리방향, 반동의 세기
-    void Hit(Transform _attackTransform, Vector2 _attackArea, ref bool _recoilDir, float _recoilStrength)
+    void Hit(Transform _attackTransform, Vector2 _attackArea, ref bool _recoilBool,Vector2 _recoilDir, float _recoilStrength)
     {
         // 공격 범위 박스안에 공격가능한 레이어 오브젝트를 toHit배열에 저장
         Collider2D[] toHit = Physics2D.OverlapBoxAll(_attackTransform.position,_attackArea,0,attackablekLayer);
@@ -623,7 +663,7 @@ public class PlayerController : MonoBehaviour
         if (toHit.Length > 0)
         {
             // 반동이 실행될 수 있게 하고
-            _recoilDir = true;
+            _recoilBool = true;
         }
 
         // 공격범위안에 들어온 수만큼 반복문 실행
@@ -637,7 +677,7 @@ public class PlayerController : MonoBehaviour
             if (e && !hitEnemy.Contains(e))
             {
                 // 적의 Enemy 스크립트에서 피격처리 메서드를 실행
-                e.EnemyHit(playerDamage, (transform.position - toHit[i].transform.position).normalized, _recoilStrength);
+                e.EnemyHit(playerDamage, _recoilDir, _recoilStrength);
                 // 리스트에 e 객체 추가
                 hitEnemy.Add(e);
             }
