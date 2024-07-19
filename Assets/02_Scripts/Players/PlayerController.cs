@@ -190,7 +190,7 @@ public class PlayerController : MonoBehaviour
             if (mana != value)
             {
                 mana = Mathf.Clamp(value,0,1);
-                manaStorage.fillAmount = Mana;
+                manaStorage.fillAmount = mana;
             }
         }
     }
@@ -206,6 +206,7 @@ public class PlayerController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         maxSpell = Enum.GetValues(typeof(Spell)).Length;
         col = GetComponent<BoxCollider2D>();
+        manaStorage = GameObject.Find("Mana").GetComponent<Image>();
 
         gravity = rig.gravityScale;
 
@@ -802,6 +803,8 @@ public class PlayerController : MonoBehaviour
     }
     GameObject Fireball(int _dir)
     {
+        if (Mana < 0.1f) 
+            return null;
         Mana -= 0.1f;
         GameObject fireball = Instantiate(Resources.Load<GameObject>("Prefabs/Spell/Fireball"));
         fireball.transform.position = transform.position;
@@ -810,6 +813,7 @@ public class PlayerController : MonoBehaviour
     }
     GameObject FireBomb(int _dir)
     {
+        if (Mana < 0.3f) return null;
         Mana -= 0.3f;
         GameObject bomb = Instantiate(Resources.Load<GameObject>("Prefabs/Spell/FireBomb"));
         bomb.transform.position = transform.position;
@@ -818,6 +822,7 @@ public class PlayerController : MonoBehaviour
     }
     GameObject FireIncendiary(int _dir)
     {
+        if (Mana < 0.3f) return null;
         Mana -= 0.3f;
         GameObject incendiary = Instantiate(Resources.Load<GameObject>("Prefabs/Spell/FireIncendiary"));
         incendiary.transform.position = transform.position;
@@ -825,6 +830,7 @@ public class PlayerController : MonoBehaviour
     }
     GameObject FireMeteor(int _dir)
     {
+        if (Mana < 0.7f) return null;
         Mana -= 0.7f;
         GameObject meteor = Instantiate(Resources.Load<GameObject>("Prefabs/Spell/FireMeteor"));
         meteor.transform.position = transform.position;

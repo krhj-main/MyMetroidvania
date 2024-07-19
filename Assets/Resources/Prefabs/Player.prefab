@@ -369,7 +369,7 @@ MonoBehaviour:
   bloodSpurt: {fileID: 1628341410758335220, guid: a20578ed71b48dc48ba276ee44fbdadc, type: 3}
   hitFlashSpeed: 7
   timeToHeal: 1
-  manaStorage: {fileID: 6260320467280369811, guid: 759a79ebfc0575a458458bbde7eff1e6, type: 3}
+  manaStorage: {fileID: 0}
   mana: 1
   manaDrainSpeed: 0.3
   manaGain: 0.2

@@ -9183,6 +9183,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7522171747458201091, guid: 3db6f4baf0dd5da42a2f773cc03036ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7984597261860270403, guid: 3db6f4baf0dd5da42a2f773cc03036ea, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -11956,8 +11960,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 8.612801, y: 9.800549, z: 0}
-    m_Extent: {x: 74.9161, y: 54.15855, z: 0}
+    m_Center: {x: 8.6152, y: 9.799101, z: 0}
+    m_Extent: {x: 74.92551, y: 54.160103, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -14341,8 +14345,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.0062999725, y: -0.0034501553, z: 0}
-    m_Extent: {x: 4.459, y: 4.46185, z: 0}
+    m_Center: {x: -0.00695014, y: -0.00274992, z: 0}
+    m_Extent: {x: 4.4619503, y: 4.45725, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -18103,7 +18107,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -704358169578312444, guid: 7e1c0496a859e5a418a3165a07dab25a, type: 3}
       propertyPath: transitionTo
-      value: Cave_3
+      value: Clear_1
       objectReference: {fileID: 0}
     - target: {fileID: -704358169578312444, guid: 7e1c0496a859e5a418a3165a07dab25a, type: 3}
       propertyPath: exitDirection.x
@@ -18119,11 +18123,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2500477990662211024, guid: 7e1c0496a859e5a418a3165a07dab25a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.6
+      value: -14.5
       objectReference: {fileID: 0}
     - target: {fileID: 2500477990662211024, guid: 7e1c0496a859e5a418a3165a07dab25a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.1
+      value: -3.8
       objectReference: {fileID: 0}
     - target: {fileID: 3164079167551349536, guid: 7e1c0496a859e5a418a3165a07dab25a, type: 3}
       propertyPath: m_Size.x
