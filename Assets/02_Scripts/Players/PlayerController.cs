@@ -74,7 +74,6 @@ public class PlayerController : MonoBehaviour
     bool isAttack;
     [SerializeField] GameObject slashEffect;
     [SerializeField] float timeBetweenAttack;
-    float timeSinceAttack;
 
     [Space(5)]
     [Header("ÇÇ°Ý ³Ë¹é")]
@@ -223,7 +222,7 @@ public class PlayerController : MonoBehaviour
             GetInput();
         }
         
-        if (pState.dashing || pState.healing) return;
+        if (pState.dashing) return;
         if (pState.alive)
         {
             ActiveMove();
@@ -721,7 +720,7 @@ public class PlayerController : MonoBehaviour
 
     void Heal()
     {
-        if (Input.GetKey(KeyCode.V) && !pState.dashing && !pState.jumping && health < maxHealth)
+        if (Input.GetKey(KeyCode.V) && !pState.dashing && !pState.jumping && health < maxHealth && Mana >= 0.5f)
         {
             pState.healing = true;
             anim.SetBool("isHeal", true);
@@ -731,6 +730,7 @@ public class PlayerController : MonoBehaviour
             if (healTimer >= timeToHeal)
             {
                 Health++;
+                Mana -= 0.5f;
                 healTimer = 0;
             }
         }
@@ -756,6 +756,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("cast cancle");
             pState.casting = false;
             cast.CancelCasting();
+            currentSpell = 0;
             
         }
 

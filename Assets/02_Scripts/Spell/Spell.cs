@@ -58,15 +58,6 @@ public class Spell : MonoBehaviour
                 Debug.Log("hitEnemy");
                 Enemy e = hitSize[i].GetComponent<Enemy>();
                 e.EnemyHit(spellOption.spell_Damage, (transform.position - hitSize[i].transform.position).normalized, _recoilStrength);
-                /*
-                if (e && !hitEnemy.Contains(e))
-                {
-                    // 적의 Enemy 스크립트에서 피격처리 메서드를 실행
-                    e.EnemyHit(spellOption.spell_Damage, (transform.position - hitSize[i].transform.position).normalized, _recoilStrength);
-                    // 리스트에 e 객체 추가
-                    hitEnemy.Add(e);
-                }
-                */
             }
         }
     }
