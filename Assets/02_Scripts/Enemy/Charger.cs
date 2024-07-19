@@ -56,9 +56,10 @@ public class Charger : Enemy
                 
                 RaycastHit2D _hit = Physics2D.Raycast(transform.position + _ledgeCheckStartPoint, _wallCheckDir, ledgeCheckX * 10f);
                 Debug.DrawRay(transform.position + _ledgeCheckStartPoint, _wallCheckDir * 10f * ledgeCheckX, Color.red);
-                if (_hit.collider != null && _hit.collider.gameObject.CompareTag("Player"))
+                Debug.Log(_hit.collider.gameObject);
+                if (_hit.collider != null && _hit.collider.gameObject.tag.Contains("Player"))
                 {
-                    Debug.Log("Player");
+                    
                     ChangeState(EnemyStates.Charger_Detect);
                 }
 

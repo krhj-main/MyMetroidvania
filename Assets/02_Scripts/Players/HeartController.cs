@@ -77,7 +77,7 @@ public class HeartController : MonoBehaviour
         }
     }
 
-    // 최대체력량 만큼 체력 빈칸 오브젝트 생성 메서드
+    // 최대체력량 만큼 체력 컨테이너 오브젝트 생성 메서드
     void InstantiateHeartContainers()
     {
         // 최대체력량 만큼 반복문 실행
