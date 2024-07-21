@@ -19,7 +19,6 @@ public class SceneTransition : MonoBehaviour
         {
             PlayerController.Instance.transform.position = startPoint.position;
 
-            StopCoroutine(PlayerController.Instance.WalkIntoNewScene(exitDirection, exitTime));
             StartCoroutine(PlayerController.Instance.WalkIntoNewScene(exitDirection, exitTime));
         }
         StartCoroutine(UIManager.Instance.sceneFader.Fade(SceneFader.FadeDirection.Out));

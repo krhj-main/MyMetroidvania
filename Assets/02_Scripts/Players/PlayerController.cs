@@ -218,6 +218,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (pState.cutscene) return;
+
         if (pState.alive)
         {
             GetInput();
