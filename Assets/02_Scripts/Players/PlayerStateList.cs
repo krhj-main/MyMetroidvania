@@ -15,6 +15,6 @@ public class PlayerStateList : MonoBehaviour
     public bool jumping;                // 점프중인 상태 여부
     public bool healing;                // 힐 스펠 상태 여부
     public bool casting;                // 스펠 사용위해 캐스팅 중 여부
-    public bool cutscene;               // 컷 화면전환 중인지 여부
+    public bool cutscene = false;               // 컷 화면전환 중인지 여부
     public bool alive = true;                  // 플레이어가 살아있는지 여부
 }
