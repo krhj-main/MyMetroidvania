@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform groundChecker;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] float groundOffset;
+    public bool onGround;
 
     [Space(5)]
     [Header("플레이어 공격")]
@@ -217,6 +218,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        onGround = Grounded();
         if (pState.cutscene) return;
 
         if (pState.alive)
@@ -421,9 +423,9 @@ public class PlayerController : MonoBehaviour
         // 좌우
         Gizmos.DrawWireCube(XAttack.position,XAttackArea);
         // 상
-        Gizmos.DrawWireCube(UpAttack.position,UpAttackArea);
+        //Gizmos.DrawWireCube(UpAttack.position,UpAttackArea);
         // 하
-        Gizmos.DrawWireCube(DownAttack.position,DownAttackArea);
+        //Gizmos.DrawWireCube(DownAttack.position,DownAttackArea);
     }
 
 
