@@ -249,6 +249,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -704358169578312444, guid: 7e1c0496a859e5a418a3165a07dab25a, type: 3}
+      propertyPath: transitionTo
+      value: Cave_2
+      objectReference: {fileID: 0}
     - target: {fileID: 455908155504705346, guid: 7e1c0496a859e5a418a3165a07dab25a, type: 3}
       propertyPath: m_Name
       value: StageTransition

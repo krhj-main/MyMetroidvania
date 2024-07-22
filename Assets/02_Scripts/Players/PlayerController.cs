@@ -554,10 +554,8 @@ public class PlayerController : MonoBehaviour
 
         if (pState.invincible && !pState.cutscene)
         {
-            Debug.Log("Test1");
             if (Time.timeScale > 0.2 && canFlash)
             {
-                Debug.Log("Test2");
                 StartCoroutine(Flash());
             }
         }
@@ -583,8 +581,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    // 플레이어 피격시 시간이 느려지게끔 하는 메서드
-    // 구현중
+    // 플레이어 피격시 시간이 느려지게끔 하는 메서드    
     public void HitStopTime(float _newTimeScale, int _restoreSpeed, float _delay)
     {
         restoreTimeSpeed = _restoreSpeed;
@@ -592,17 +589,16 @@ public class PlayerController : MonoBehaviour
 
         if (_delay > 0)
         {
-            StopCoroutine(StartTimeAgain(_delay));
             StartCoroutine(StartTimeAgain(_delay));
         }
         else
         {
+            StopCoroutine(StartTimeAgain(_delay));
             restoreTime = true;
         }
     }
 
-    // 피격시 처리에 관한 메서드
-    // 구현중
+    // 피격시 처리에 관한 메서드    
     IEnumerator StartTimeAgain(float _delay)
     {
         restoreTime = true;
