@@ -130,7 +130,7 @@ public class Enemy : MonoBehaviour
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !PlayerController.Instance.pState.invincible && health > 0)
+        if (collision.gameObject.CompareTag("Player") && !PlayerController.Instance.pState.invincible && PlayerController.Instance.Health > 0)
         {
             Attack();
 

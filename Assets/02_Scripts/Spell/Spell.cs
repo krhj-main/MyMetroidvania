@@ -45,8 +45,9 @@ public class Spell : MonoBehaviour
     protected virtual void Hit(Vector2 _attackArea, float _radius, float _recoilStrength)
     {
         // 공격 범위 박스안에 공격가능한 레이어 오브젝트를 toHit배열에 저장
-        //Collider2D[] toHit = Physics2D.OverlapBoxAll(_attackTransform.position, _attackArea, 0, fireball.spell_AttackablekLayer);
-        int toHit = Physics2D.OverlapCircleNonAlloc(_attackArea, _radius, hitSize, spellOption.spell_AttackablekLayer);
+        
+        int toHit = Physics2D.OverlapCircleNonAlloc(_attackArea, _radius,
+                             hitSize, spellOption.spell_AttackablekLayer);
         // 리스트 피격 적 객체를 생성한 뒤
         List<Enemy> hitEnemy = new List<Enemy>();
 
