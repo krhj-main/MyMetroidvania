@@ -25,6 +25,7 @@ public class CamFollowPlayer : MonoBehaviour
         camBase = GetComponent<CinemachineVirtualCameraBase>();
         confiner = GetComponent<CinemachineConfiner2D>();
 
+
         // 카메라가 추적할 트랜스폼 설정 -> 플레이어
         camBase.Follow = GameObject.Find("Player").transform;
         // 카메라의 제한 범위 콜라이더 설정 ->
