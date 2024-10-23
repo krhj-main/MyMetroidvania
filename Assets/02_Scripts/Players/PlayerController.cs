@@ -43,23 +43,23 @@ public class PlayerController : MonoBehaviour
 
 
 
-    [Header("ÇÃ·¹ÀÌ¾î ÀÌµ¿¼Óµµ")]
+    [Header("í”Œë ˆì´ì–´ ì´ë™ì†ë„")]
     [SerializeField] float moveSpeed;
 
     [Space(5)]
-    [Header("ÇÃ·¹ÀÌ¾î Á¡ÇÁ")]
+    [Header("í”Œë ˆì´ì–´ ì í”„")]
     [SerializeField] float jumpForce;
     [SerializeField] int jumpExtra;
     int jumpCurrent;
 
     [Space(5)]
-    [Header("ÇÃ·¹ÀÌ¾î ´åÁö")]
+    [Header("í”Œë ˆì´ì–´ íšŒí”¼")]
     [SerializeField] float dodgeSpeed;
     [SerializeField] float dodgeCoolTime;
     [SerializeField] float dodgeTime;
 
     [Space(5)]
-    [Header("±×¶ó¿îµå Ã¼Å©")]
+    [Header("ê·¸ë¼ìš´ë“œ ì²´í¬")]
     [SerializeField] bool Debugging;
     [SerializeField] Transform groundChecker;
     [SerializeField] LayerMask groundLayer;
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
     public bool onGround;
 
     [Space(5)]
-    [Header("ÇÃ·¹ÀÌ¾î °ø°İ")]
+    [Header("í”Œë ˆì´ì–´ ê³µê²©")]
     [SerializeField] int playerDamage;
     [SerializeField] float playerAttackSpeed;
     [SerializeField] float playerAttackCooltime;
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float timeBetweenAttack;
 
     [Space(5)]
-    [Header("ÇÇ°İ ³Ë¹é")]
+    [Header("í”¼ê²© ë°˜ë™")]
     [SerializeField] int recoilingXSteps = 5;
     [SerializeField] int recoilingYSteps = 5;
     [SerializeField] float recoilXSpeed = 100;
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
     int stepsXRecoiled, stepsYRecoiled;
 
     [Space(5)]
-    [Header("°ø°İ ¹üÀ§")]
+    [Header("ê³µê²© ì˜ì—­")]
     [SerializeField] Transform XAttack;
     [SerializeField] Transform UpAttack;
     [SerializeField] Transform DownAttack;
@@ -95,24 +95,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask attackablekLayer;
 
     [Space(5)]
-    [Header("ÇÃ·¹ÀÌ¾î Ã¼·Â")]
+    [Header("í”Œë ˆì´ì–´ ì²´ë ¥")]
     [SerializeField] public int maxHealth;
     public int health;
     [SerializeField] GameObject bloodSpurt;
     [SerializeField] float hitFlashSpeed;
 
     [Space(5)]
-    [Header("Èú ½ºÆç ¼³Á¤")]
+    [Header("í ê´€ë ¨ ë³€ìˆ˜")]
     float healTimer;
     [SerializeField] float timeToHeal;
 
 
-    // ÇÃ·¹ÀÌ¾î Ã¼·Â Áõ°¨ Ã³¸®ÇÒ µ¨¸®°ÔÀÌÆ®
+    // í”Œë ˆì´ì–´ ì²´ë ¥ ë³€ê²½ ì²˜ë¦¬ìš© ë¸ë¦¬ê²Œì´íŠ¸
     public delegate void OnHealthChangedDelegate();
     [HideInInspector] public OnHealthChangedDelegate onHealthChangedCallback;
 
     [Space(5)]
-    [Header("ÇÃ·¹ÀÌ¾î ¸¶³ª")]
+    [Header("í”Œë ˆì´ì–´ ë§ˆë‚˜")]
     [SerializeField] Image manaStorage;
     [SerializeField] float mana;
     [SerializeField] float manaDrainSpeed;
@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
 
 
     [Space(5)]
-    [Header("ÇÃ·¹ÀÌ¾î ¹İµ¿")]
+    [Header("í”Œë ˆì´ì–´ ë°˜ë™")]
     [SerializeField] float recoilForce;
     [SerializeField] float recoilTime;
 
@@ -249,27 +249,27 @@ public class PlayerController : MonoBehaviour
         FlashWhileInvincible();
         Recoil();        
     }
-    // ÇÃ·¹ÀÌ¾î ÀÔ·Â ÀÎ½Ä¿¡ °üÇÑ Ã³¸®
+    // í”Œë ˆì´ì–´ ì…ë ¥ ì¸ì‹ê³¼ ê´€ë ¨ ì²˜ë¦¬
     void GetInput()
     {
-        // ÇÃ·¹ÀÌ¾î »óÇÏÁÂ¿ì ÀÎ½ÄÀ» º¤ÅÍ2 °ª¿¡ ÀúÀå
+        // í”Œë ˆì´ì–´ ìƒí•˜ì¢Œìš° ì¸ì‹ì„ ë²¡í„°2 ê°’ì— ì €ì¥
         moveAxis = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
 
-        // ¶¥ÀÌ ¾Æ´Ñ°÷¿¡ ÀÖ´Ù¸é Á¡ÇÁ ¾Ö´Ï¸ŞÀÌ¼ÇÀ» ½ÇÇà
+        // ë•…ì— ìˆëŠ”ê²Œ ì•„ë‹ˆë¼ë©´ ì í”„ ì• ë‹ˆë©”ì´ì…˜ì„ ì‹¤í–‰
         anim.SetBool("isJump", !Grounded());
 
-        // C Å°¸¦ ÀÔ·Â¹Ş°í, ÃÖ´ë Á¡ÇÁ¼ö°¡ 0º¸´Ù Å©°Å³ª ÇÃ·¹ÀÌ¾î°¡ ¶¥¿¡ ´ê¾ÆÀÖ´Ù¸é
+        // C í‚¤ë¥¼ ì…ë ¥ë°›ê³ , í˜„ì¬ ì í”„íšŸìˆ˜ê°€ 0ë³´ë‹¤ í¬ê±°ë‚˜ í”Œë ˆì´ì–´ê°€ ì í”„ ì¤‘ì´ë¼ë©´
         if (Input.GetKeyDown(KeyCode.C) && (jumpCurrent > 0 || !pState.jumping))
         {
             jumpCurrent--;
             ActiveJump();
-            // Á¡ÇÁ ¼ö¸¦ 1¾¿ ÁÙÀÌ°í, Á¡ÇÁ ¸Ş¼­µå ½ÇÇà
+            // ì í”„ ì‹¤í–‰ 1íšŒ ì¤„ì´ê³ , ì í”„ ë©”ì„œë“œ ì‹¤í–‰
         }
 
-        // °ø°İ XÅ°¸¦ ÀÔ·Â¹Ş¾Æ ºÒ¸°°ª¿¡ ÀúÀå
+        // ê³µê²© Xí‚¤ë¥¼ ì…ë ¥ë°›ì•„ ê³µê²©ì‹¤í–‰
         isAttack = Input.GetKeyDown(KeyCode.X);
 
-        // ¹Ì´Ï¸Ê¿­±â
+        // ë¯¸ë‹ˆë§µì—´ê¸°
         openMap = Input.GetKey(KeyCode.M);
 
         
@@ -287,50 +287,50 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // ÇÃ·¹ÀÌ¾î ÀÌµ¿ ¸Ş¼­µå
+    // í”Œë ˆì´ì–´ ì´ë™ ë©”ì„œë“œ
     void ActiveMove()
     {
 
-        // ÀÔ·Â¹ŞÀº º¤ÅÍ2ÀÇ x°ªÀ» ÀÌµ¿¼Óµµ¿¡ °öÇØ ÀÌµ¿
+        // ì…ë ¥ë°›ì€ ë²¡í„°2ì˜ xê°’ê³¼ ì´ë™ì†ë„ë¥¼ ê³±í•´ ì´ë™
         rig.velocity = new Vector2(moveAxis.x * moveSpeed, rig.velocity.y);
 
-        // ÀÌµ¿°ªÀÌ 0 ÀÌ ¾Æ´Ï¶ó¸é °È±â ¾Ö´Ï¸ŞÀÌ¼Ç ½ÇÇà
+        // ì´ë™ê°’ì´ 0 ì´ ì•„ë‹ˆë¼ë©´ ê±·ê¸° ì• ë‹ˆë©”ì´ì…˜ ì‹¤í–‰
         anim.SetBool("isWalk",moveAxis.x!=0);
     }
 
     
-    // ÀÌµ¿ ÀÔ·Â°ª¿¡ µû¸¥ ÇÃ·¹ÀÌ¾î ÁÂ¿ì ¹İÀü
+    // ì´ë™ ì…ë ¥ê°’ì— ë”°ë¼ í”Œë ˆì´ì–´ ì¢Œìš° ë°˜ì „
     void ActiveFlip()
     {
-        // ÀÌµ¿°ªÀÌ ¾ç¼ö¶ó¸é 
+        // ì´ë™ê°’ì´ ì–‘ìˆ˜ë©´ 
         if (moveAxis.x > 0)
         {
-            // ÇÃ·¹ÀÌ¾îÀÇ ½ºÄÉÀÏÀ» 1·Î ÇØ¼­ ¿À¸¥ÂÊÀ» ¹Ù¶óº¸°Ô ¼³Á¤
+            // í”Œë ˆì´ì–´ì˜ ìŠ¤ì¼€ì¼ì„ 1ë¡œ í•´ì„œ ì˜¤ë¥¸ìª½ì„ ë°”ë¼ë³´ê²Œ ì„¤ì •
             transform.localScale = new Vector2(1, transform.localScale.y);
-            // ÇÃ·¹ÀÌ¾î »óÅÂ°¡ ¿À¸¥ÂÊÀ» º¸°íÀÖ´Ù°í Àü´Ş
+            // í”Œë ˆì´ì–´ ìƒíƒœê°€ ì˜¤ë¥¸ìª½ì„ ë³´ê³ ìˆë‹¤ê³  ì„¤ì •
             pState.lookRight = true;
         }
-        // ÀÌµ¿°ªÀÌ À½¼ö¶ó¸é
+        // ì´ë™ê°’ì´ ìŒìˆ˜ë¼ë©´
         if (moveAxis.x < 0)
         {
-            // ÇÃ·¹ÀÌ¾î ½ºÄÉÀÏÀ» -1·Î ÇØ ¿ŞÂÊÀ» ¹Ù¶óº¸°Ô ¼³Á¤
+            // í”Œë ˆì´ì–´ ìŠ¤ì¼€ì¼ì„ -1ë¡œ í•´ ì™¼ìª½ì„ ë°”ë¼ë³´ê²Œ ì„¤ì •
             transform.localScale = new Vector2(-1, transform.localScale.y);
-            // ÇÃ·¹ÀÌ¾î »óÅÂ°¡ ¿ŞÂÊÀ» º¸°íÀÖ´Ù°í Àü´Ş
+            // í”Œë ˆì´ì–´ ìƒíƒœê°€ ì™¼ìª½ì„ ë³´ê³ ìˆë‹¤ê³  ì„¤ì •
             pState.lookRight = false;
         }
     }
 
-    // ÇÃ·¹ÀÌ¾î Á¡ÇÁ ¸Ş¼­µå
+    // í”Œë ˆì´ì–´ ì í”„ ë©”ì„œë“œ
     void ActiveJump()
     {
-        // ÇÃ·¹ÀÌ¾î »óÅÂ Á¡ÇÁÁß
+        // í”Œë ˆì´ì–´ ì í”„ ìƒíƒœë¡œ
         pState.jumping = true;
-        // x ÀÌµ¿°ªÀº À¯ÁöÇÑÃ¤ ¼³Á¤ÇÑ Á¡ÇÁ·Â °ª¸¸Å­ yÃàÀ¸·Î ÀÌµ¿
+        // x ì´ë™ê°’ì€ ê·¸ëŒ€ë¡œ ìœ ì§€í•œ ì±„ ì í”„ë ¥ ë§Œí¼ yë°©í–¥ìœ¼ë¡œ ì´ë™
         rig.velocity = new Vector2(rig.velocity.x, jumpForce);        
     }
     void UpdateJumpAction()
     {
-        // ¸¸¾à ¶¥¿¡ ´ê¾ÆÀÖ´Ù¸é Á¡ÇÁ °¡´É¼ö = ÃÖ´ë Á¡ÇÁ ¼ö¿Í °°°Ô ¼³Á¤
+        // ë•…ì— ë‹¿ì•„ ìˆë‹¤ë©´ ì í”„ ê°€ëŠ¥ìˆ˜ = ìµœëŒ€ ì í”„ ê°€ëŠ¥ íšŸìˆ˜ ë§Œí¼
         if (Grounded())
         {
             pState.jumping = false;
@@ -338,99 +338,99 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // ±¸¸£±â¿Í ½½¶óÀÌµù ¸ğ¼Ç¿¡ °üÇÑ ¸Ş¼­µå
+    // í”Œë ˆì´ì–´ ìŠ¬ë¼ì´ë”© íšŒí”¼ì™€ ê´€ë ¨ ë©”ì„œë“œ
     void ActiveDodge()
     {
-        // ZÅ°¸¦ ´­·¶À»¶§, ´ë½¬°¡ °¡´ÉÇÑ »óÅÂ°í, ´ë½¬ÁßÀÌ ¾Æ´Ï¸é¼­ ¶¥¿¡ ´ê¾ÆÀÖ´Ù¸é
+        // Zí‚¤ë¥¼ ëˆŒë €ìœ¼ë©°, ëŒ€ì‹œê°€ ê°€ëŠ¥í•œ ìƒíƒœê³ , ëŒ€ì‹œì¤‘ì´ ì•„ë‹ˆë©´ì„œ ë•…ì— ë‹¿ì•„ìˆë‹¤ë©´
         if (Input.GetKeyDown(KeyCode.Z) && canDash && !dashed && Grounded())
         {
             dashed = true;
             StartCoroutine(Dash());
-            // ´ë½¬ÁßÀÎ »óÅÂ·Î ¹Ù²Ù°í ´ë½¬ ÄÚ·çÆ¾À» ½ÇÇà
+            // ëŒ€ì‹œì¤‘ì¸ ìƒíƒœë¡œ ë°”ê¾¸ê³  ëŒ€ì‹œ ì½”ë£¨í‹´ì„ ì‹¤í–‰
         }
-        // ±×³É ¶¥¿¡¸¸ ´ê¾ÆÀÖ´Ù¸é
+        // ê·¸ëƒ¥ ë•…ì—ë§Œ ë‹¿ì•„ìˆë‹¤ë©´
         if(Grounded())
         {
-            // ´ë½¬ÁßÀÌÁö ¾Ê´Ù°í Àü´Ş
+            // ëŒ€ì‹œì¤‘ì´ì§€ ì•Šë‹¤ê³  ì„¤ì •
             dashed = false;
             
         }
     }
 
-    // ´ë½¬ ÄÚ·çÆ¾
+    // ëŒ€ì‹œ ì½”ë£¨í‹´
     IEnumerator Dash()
     {
-        // ´ë½¬ÁßÀÏ¶§´Â ´ë½¬°¡ ºÒ°¡´ÉÇØ¾ßÇÏ¹Ç·Î, false
+        // ëŒ€ì‹œì¤‘ì¼ë• ëŒ€ì‹œê°€ ë¶ˆê°€ëŠ¥í•´ì•¼í•˜ë¯€ë¡œ, false
         canDash = false;
-        // ÇÃ·¹ÀÌ¾î »óÅÂ ´ë½¬ ÁßÀ¸·Î º¯°æ
+        // í”Œë ˆì´ì–´ ìƒíƒœ ëŒ€ì‹œ ìƒíƒœë¡œ ì„¤ì •
         pState.dashing = true;
-        // ´ë½¬ Áß¿¡ Áß·ÂÀÇ ¿µÇâÀ» ¹ŞÁö ¾Ê°Ô ÀÏ½ÃÀûÀ¸·Î Áß·Â°ª 0À¸·Î º¯°æ
+        // ëŒ€ì‹œ ì¤‘ì— ì¤‘ë ¥ì˜ ì˜í–¥ì„ ë°›ì§€ ì•Šê²Œ ì¼ì‹œì ìœ¼ë¡œ ì¤‘ë ¥ê°’ 0ìœ¼ë¡œ ì„¤ì •
 
         gameObject.layer = 7;
         gameObject.tag = "InvinciblePlayer";
-        // ´ë½¬Áß¿¡´Â °ø°İ¹ŞÁö ¾Ê°í ¸ó½ºÅÍ¸¦ Åë°úÇÏ°Ô²û Æ®¸®°Å·Î ¹Ù²Ù°í
+        // ëŒ€ì‹œì¤‘ì—ëŠ” ê³µê²©ë°›ì§€ ì•Šê²Œ ë ˆì´ì–´ë¥¼ íŠ¸ë¦¬ê±°ë¡œ ë°”ê¾¸ê³ 
         rig.gravityScale = 0;
         
-        // ¶¥¿¡ ´ê¾ÆÀÖ°í ÀÌµ¿ yÃà°ªÀÌ 0°ú °°°Å³ª Å©¸é ±¸¸£±â ½ÇÇà
+        // ë•…ì— ë‹¿ì•„ìˆê³  ì´ë™ yê°’ì´ 0ê³¼ ê°™ê±°ë‚˜ í¬ë©´ êµ¬ë¥´ê¸° ì‹¤í–‰
         if (Grounded() && moveAxis.y >= 0)
         {
             anim.SetTrigger("isRoll");
         }
-        // ¶¥¿¡ ´ê¾ÆÀÖ´Âµ¥ y°ªÀÌ ¾Æ·¡·Î ´­¸®°íÀÖÀ¸¸é ½½¶óÀÌµù ½ÇÇà
+        // ë•…ì— ë‹¿ì•„ìˆëŠ”ë° yê°’ì´ ì•„ë˜ë¡œ í–¥í•˜ê³ ìˆë‹¤ë©´ ìŠ¬ë¼ì´ë”© ì‹¤í–‰
         else if (Grounded() && moveAxis.y < 0)
         {
             anim.SetTrigger("isSlide");
         }
-        // ÇÃ·¹ÀÌ¾î ÁÂ¿ì »óÅÂ¿¡ µû¶ó ¹æÇâ °áÁ¤
+        // í”Œë ˆì´ì–´ ì¢Œìš° ìƒíƒœì— ë”°ë¼ ë°©í–¥ ì„¤ì •
         int _dir = pState.lookRight ? 1 : -1;
-        // ¹æÇâ °ª * ¼Óµµ°ªÀ» °öÇØ ÇÃ·¹ÀÌ¾î ¼Óµµ¿¡ Àü´Ş
+        // ë°©í–¥ ê°’ * ì†ë„ê°’ìœ¼ë¡œ ëŒ€ì‹œ í”Œë ˆì´ì–´ ì†ë„ë¥¼ ì„¤ì •
         rig.velocity = new Vector2(_dir * dodgeSpeed, 0);
-        // È¸ÇÇ ½ÇÇà½Ã°£À» ±â´Ù¸° ÈÄ
+        // íšŒí”¼ ì§€ì†ì‹œê°„ì„ ê¸°ë‹¤ë¦° í›„
         yield return new WaitForSeconds(dodgeTime);
-        // ÇÃ·¹ÀÌ¾î°¡ ´ë½¬»óÅÂ°¡ ¾Æ´Ï¶ó°í ¹Ù²Ş
+        // í”Œë ˆì´ì–´ê°€ ëŒ€ì‹œìƒíƒœê°€ ì•„ë‹ˆë¼ê³  ë°”ê¿ˆ
         pState.dashing = false;
-        // Áß·Âµµ ±âÁ¸°ªÀ¸·Î ÃÊ±âÈ­
+        // ì¤‘ë ¥ë„ ì›ë˜ëŒ€ë¡œ ì´ˆê¸°í™”
         rig.gravityScale = gravity;
-        // ÀÏÁ¤ ´ë½¬ ÄğÅ¸ÀÓÀÌ Áö³ª¸é
+        // ë‹¤ìŒ ëŒ€ì‹œ ì¿¨íƒ€ì„ì„ ê¸°ë‹¤ë¦¼
         yield return new WaitForSeconds(dodgeCoolTime);
-        // ´ë½¬°¡ ´Ù½Ã °¡´ÉÇÏ°Ô²û true·Î º¯°æ
+        // ëŒ€ì‹œë¥¼ ë‹¤ì‹œ ê°€ëŠ¥í•˜ê²Œë” trueë¡œ ì„¤ì •
         canDash = true;
         gameObject.layer = 6;
         gameObject.tag = "Player";
-        // ´Ù½Ã ¸ó½ºÅÍ¿Í Ãæµ¹µÇ°Ô Æ®¸®°Å¸¦ ÇØÁ¦
+        // ë‹¤ì‹œ ë ˆì´ì–´ì— ì¶©ëŒë˜ê²Œ íŠ¸ë¦¬ê±°ë¥¼ í•´ì œ
     }
 
-    // ÇÃ·¹ÀÌ¾î°¡ ¶¥¿¡ÀÖ´ÂÁö ¾Æ´ÑÁö ÆÇº°ÇÏ´Â ¸Ş¼­µå
+    // í”Œë ˆì´ì–´ê°€ ë•…ì—ìˆëŠ”ì§€ ì•„ë‹Œì§€ íŒë³„í•˜ëŠ” ë©”ì„œë“œ
     bool Grounded()
     {
-        // ÇÃ·¹ÀÌ¾î¿¡ ºÙ¿©Áø ±×¶ó¿îµåÃ¼Ä¿ ºó¿ÀºêÁ§Æ®¸¦ È°¿ëÇØ groundLayer¸¦ ±¸º°
+        // í”Œë ˆì´ì–´ê°€ ë‹¤ìš´ëœ ê·¸ë¼ìš´ë“œì²´ì»¤ ì»´í¬ë„ŒíŠ¸ë¥¼ í™œìš©í•´ groundLayerë¥¼ ì²´í¬
         bool isGround = Physics2D.OverlapCircle(groundChecker.position, groundOffset, groundLayer);
         return isGround;
     }
 
-    // µğ¹ö±ë¿ë ±âÁî¸ğ ¸Ş¼­µå
+    // ë””ë²„ê¹… ê´€ë ¨í•œ ë©”ì„œë“œ
     private void OnDrawGizmos()
     {
-        // µğ¹ö±ë ºÒ¸°°ªÀÌ false ¸é ±âÁî¸ğ¸¦ ±×¸®Áö ¾ÊÀ½
+        // ë””ë²„ê¹… ì„¤ì •ì´ false ë©´ ê¸°ì¦ˆëª¨ë¥¼ ê·¸ë¦¬ì§€ ì•ŠìŒ
         if (!Debugging) return;
 
-        // ±âÁî¸ğÀÇ ÄÃ·¯ ¼³Á¤
+        // ê¸°ì¦ˆëª¨ì˜ ì»¬ëŸ¬ ì„¤ì •
         Gizmos.color = Color.red;
-        // ±×¶ó¿îµåÃ¼Ä¿¸¦ ´«À¸·Î È®ÀÎÇÏ±âÀ§ÇØ ±¸Ã¼ ±âÁî¸ğ¸¦ ±×¸®±â
+        // ê·¸ë¼ìš´ë“œì²´ì»¤ì˜ ìœ„ì¹˜ë¥¼ í™•ì¸í•˜ê¸°ìœ„í•œ êµ¬ì²´ ê¸°ì¦ˆëª¨ë¥¼ ê·¸ë¦¼
         Gizmos.DrawSphere(groundChecker.position,groundOffset);
 
-        // ÇÃ·¹ÀÌ¾îÀÇ °ø°İ¹üÀ§¸¦ ¼³Á¤ÇÏ±â À§ÇØ ¿ÍÀÌ¾îÅ¥ºê ±âÁî¸ğ ±×¸®±â
-        // ÁÂ¿ì
+        // í”Œë ˆì´ì–´ì˜ ê³µê²©ë²”ìœ„ë¥¼ ë³´ì—¬ì£¼ê¸° ìœ„í•œ ì™€ì´ì–´íë¸Œë¥¼ ê·¸ë¦¼
+        // ì¢Œìš°
         Gizmos.DrawWireCube(XAttack.position,XAttackArea);
-        // »ó
+        // ìƒ
         //Gizmos.DrawWireCube(UpAttack.position,UpAttackArea);
-        // ÇÏ
+        // í•˜
         //Gizmos.DrawWireCube(DownAttack.position,DownAttackArea);
     }
 
 
-    // ÇÃ·¹ÀÌ¾î °ø°İ, ÇÇ°İ½Ã ¹İµ¿À¸·Î ¹Ğ·Á³ª´Â ¼³Á¤ °ª ¸Ş¼­µå
-    // ±¸ÇöÁß
+    // í”Œë ˆì´ì–´ ê³µê²©, í”¼ê²©ì‹œ ë°˜ë™ìœ¼ë¡œ ë°€ë ¤ë‚˜ëŠ” ê²ƒê³¼ ê´€ë ¨ëœ ë©”ì„œë“œ
+    // ë°˜ë™ê°’
     void Recoil()
     {
         if (pState.recoilingX)
@@ -463,7 +463,7 @@ public class PlayerController : MonoBehaviour
             rig.gravityScale = gravity;
         }
 
-        // ÇÇ°İ È¿°ú ¸ØÃß±â
+        // í”¼ê²© íš¨ê³¼ ë©ˆì¶”ê¸°
         if (pState.recoilingX && stepsXRecoiled < recoilingXSteps)
         {
             stepsXRecoiled++;
@@ -487,13 +487,13 @@ public class PlayerController : MonoBehaviour
             StopRecoilY();
         }
     }
-    // XÃàÀ¸·Î ¹İµ¿ÀÌ ½ÇÇàµÉ ¶§ ¸ØÃçÁÖ±â À§ÇÑ ¸Ş¼­µå
+    // Xë°©í–¥ì˜ ë°˜ë™ì„ ë©ˆì¶”ê²Œ í•´ ì£¼ëŠ”ì£¼ê¸° ìœ„í•œ ë©”ì„œë“œ
     void StopRecoilX()
     {
         stepsXRecoiled = 0;
         pState.recoilingX = false;
     }
-    // YÃàÀ¸·Î ¹İµ¿ ½ÇÇà ½Ã ¸ØÃçÁÖ±â À§ÇÑ ¸Ş¼­µå
+    // Yë°©í–¥ì˜ ë°˜ë™ ë©ˆì¶¤ í•´ ì£¼ëŠ”ì£¼ê¸° ìœ„í•œ ë©”ì„œë“œ
     void StopRecoilY()
     {
         stepsYRecoiled = 0;
@@ -501,12 +501,12 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    //ÇÃ·¹ÀÌ¾î ÇÇ°İ ½Ã Ã¼·Â °¨¼Ò Ã³¸®
+    //í”Œë ˆì´ì–´ í”¼ê²© ì‹œ ì²´ë ¥ ê°ì†Œ ì²˜ë¦¬
     public void TakeDamage(float _damage)
     {
         if (pState.alive)
         {
-            // Health ÇÁ·ÎÆÛÆ¼¸¦ ÅëÇØ Ã¼·Â°ªÀ» ¾÷µ¥ÀÌÆ®
+            // Health í”„ë¡œí¼í‹°ë¡œ í˜„ì¬ ì²´ë ¥ê°’ì„ ì—…ë°ì´íŠ¸
             Health -= Mathf.RoundToInt(_damage);
             
             if (Health <= 0)
@@ -517,29 +517,29 @@ public class PlayerController : MonoBehaviour
             else
             {
                 anim.SetTrigger("isHit");
-                // µ¥¹ÌÁö°¡ Ãæµ¹ ÇÁ·¹ÀÓ¸¶´Ù °è¼Ó Àû¿ëµÇÁö¾Êµµ·Ï ÄÚ·çÆ¾ ½ÇÇà
+                // ì—°ì†ìœ¼ë¡œ ì¶©ëŒ ë°ë¯¸ì§€ë¥¼ ë°›ì§€ ì•Šë„ë¡í•˜ëŠ” ì½”ë£¨í‹´ ì‹¤í–‰
                 StartCoroutine(StopTakingDamage());
             }
         }
     }
 
-    // ÇÇ°İ Ã³¸®¿¡ ÀÏÁ¤ ½Ã°£À» ÁÖ±âÀ§ÇÑ ÄÚ·çÆ¾
+    // í”¼ê²© ì²˜ë¦¬ë¥¼ ìœ„í•œ ì‹œê°„ì„ ì£¼ê¸°ìœ„í•œ ì½”ë£¨í‹´
     IEnumerator StopTakingDamage()
     {
-        // ÇÃ·¹ÀÌ¾î°¡ Àá½Ã ¹«ÀûÀÌ µÇ°Ô²û invincibleÀ» true·Î ¼³Á¤
+        // í”Œë ˆì´ì–´ê°€ ì ì‹œ ë¬´ì ì´ ë˜ê²Œë” invincibleì„ trueë¡œ ì„¤ì •
         pState.invincible = true;
-        // ÇÇ°¡ Èğ³¯¸®´Â ÆÄÆ¼Å¬ È¿°ú¸¦ »ı¼º½ÃÅ°°í
+        // í”¼ê²© íŠ€ê²¨ë‚˜ëŠ” íŒŒí‹°í´ íš¨ê³¼ë¥¼ ìƒì„±ì‹œí‚´
         GameObject _bloodSpurtParticles = Instantiate(bloodSpurt, transform.position, Quaternion.identity);
-        // 1.5ÃÊ µÚ¿¡ ÆÄÆ¼Å¬ È¿°ú »èÁ¦
+        // 1.5ì´ˆ í›„ì— íŒŒí‹°í´ íš¨ê³¼ ì‚­ì œ
         Destroy(_bloodSpurtParticles, 1.5f);
         //anim.SetTrigger("isHitted");
-        // 1ÃÊ µÚ
+        // 1ì´ˆ í›„
         yield return new WaitForSeconds(1f);
-        // ÇÃ·¹ÀÌ¾î°¡ ´Ù½Ã ÇÇ°İµÉ ¼ö ÀÖ°Ô invincibleÀ» false·Î ¼³Á¤
+        // í”Œë ˆì´ì–´ê°€ ë‹¤ì‹œ í”¼ê²©ë  ìˆ˜ ìˆê²Œ invincibleì„ falseë¡œ ì„¤ì •
         pState.invincible = false;
     }
 
-    // ¹«Àû½Ã°£µ¿¾È ÇÃ·¹ÀÌ¾î°¡ ¹«ÀûÁßÀÎÁö È®ÀÎ µÉ ¼ö ÀÖµµ·ÏÇÏ´Â ¸Ş¼­µå
+    // ë¬´ì ì‹œê°„ë™ì•ˆ í”Œë ˆì´ì–´ê°€ ê¹œë¹¡ê±°ë¦¬ê²Œ í™•ì¸ í•  ìˆ˜ ìˆë„ë¡í•˜ëŠ” ë©”ì„œë“œ
     IEnumerator Flash()
     {
         Debug.Log("Flash");
@@ -551,7 +551,7 @@ public class PlayerController : MonoBehaviour
 
     void FlashWhileInvincible()
     {
-        // ÇÃ·¹ÀÌ¾î ½ºÇÁ¶óÀÌÆ®ÀÇ »ö±òÀ» ¹«Àû½Ã°£µ¿¾È¿¡´Â ±ôºıÀÌ°Ô²û ÇÏ¿© Ç¥½Ã½ÃÅ´
+        // í”Œë ˆì´ì–´ ìŠ¤í”„ë¼ì´íŠ¸ë¥¼ ë¬´ì ì‹œê°„ë™ì•ˆì— ê¹œë¹¡ì´ê²Œë” í•˜ì—¬ í‘œì‹œì‹œí‚´
         //sr.material.color = pState.invincible ? Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time * hitFlashSpeed, 1.0f)) : Color.white;
 
         if (pState.invincible && !pState.cutscene)
@@ -567,7 +567,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // ÇÃ·¹ÀÌ¾î°¡ ÇÇ°İ ½Ã ´À·ÁÁø ½Ã°£À» ´Ù½Ã µÇµ¹¸®´Â ¸Ş¼­µå ±¸ÇöÁß
+    // í”Œë ˆì´ì–´ê°€ í”¼ê²© ì‹œ ëŠë ¤ì§„ ì‹œê°„ì„ ë‹¤ì‹œ ë˜ëŒë¦¬ëŠ” ë©”ì„œë“œ êµ¬í˜„ì¤‘
     void RestoreTimeScale()
     {
         if (restoreTime)
@@ -583,7 +583,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    // ÇÃ·¹ÀÌ¾î ÇÇ°İ½Ã ½Ã°£ÀÌ ´À·ÁÁö°Ô²û ÇÏ´Â ¸Ş¼­µå    
+    // í”Œë ˆì´ì–´ í”¼ê²©ì‹œ ì‹œê°„ì„ ëŠë¦¬ê²Œí•˜ëŠ” ë©”ì„œë“œ    
     public void HitStopTime(float _newTimeScale, int _restoreSpeed, float _delay)
     {
         restoreTimeSpeed = _restoreSpeed;
@@ -600,7 +600,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // ÇÇ°İ½Ã Ã³¸®¿¡ °üÇÑ ¸Ş¼­µå    
+    // í”¼ê²©ì‹œ ì²˜ë¦¬ë¥¼ ìœ„í•œ ë©”ì„œë“œ    
     IEnumerator StartTimeAgain(float _delay)
     {
         restoreTime = true;
@@ -610,9 +610,9 @@ public class PlayerController : MonoBehaviour
     {
         pState.alive = false;
         Time.timeScale = 1f;
-        // ÇÇ°¡ Èğ³¯¸®´Â ÆÄÆ¼Å¬ È¿°ú¸¦ »ı¼º½ÃÅ°°í
+        // í”¼ê²© íŠ€ê²¨ë‚˜ëŠ” íŒŒí‹°í´ íš¨ê³¼ë¥¼ ìƒì„±ì‹œí‚´
         GameObject _bloodSpurtParticles = Instantiate(bloodSpurt, transform.position, Quaternion.identity);
-        // 1.5ÃÊ µÚ¿¡ ÆÄÆ¼Å¬ È¿°ú »èÁ¦
+        // 1.5ì´ˆ í›„ì— íŒŒí‹°í´ íš¨ê³¼ ì‚­ì œ
         Destroy(_bloodSpurtParticles, 1.5f);
         
 
@@ -620,70 +620,70 @@ public class PlayerController : MonoBehaviour
 
         StartCoroutine(UIManager.Instance.ActiveDeathScreen());
     }
-    // ÇÃ·¹ÀÌ¾î °ø°İ ½ÇÇà ¸Ş¼­µå
+    // í”Œë ˆì´ì–´ ê³µê²© ê´€ë ¨ ë©”ì„œë“œ
     void ActiveAttack()
     {
-        // ÇÃ·¹ÀÌ¾î ÀÔ·ÂÀ» ¹Ş¾Æ¼­ isAttackÀÌ true°¡ µÈ´Ù¸é
+        // í”Œë ˆì´ì–´ ì…ë ¥ì„ ë°›ì•„ì„œ isAttackì´ trueê°€ ëœë‹¤ë©´
         if (isAttack)
         {
-            // °ø°İ ¾Ö´Ï¸ŞÀÌ¼ÇÀ» ½ÇÇàÇÏ°í
+            // ê³µê²© ì• ë‹ˆë©”ì´ì…˜ì„ ì‹¤í–‰í•˜ê³ 
             anim.SetTrigger("isAttack");
             
-            // ¶¥¿¡ ´ê¾ÆÀÖ°í yÃà ÀÌµ¿°ªÀÌ 0ÀÌÇÏ¶ó¸é 
+            // ë•…ì— ë‹¿ì•„ìˆê³  yì¶• ì´ë™ê°’ì´ 0ì´í•˜ë¼ë©´ 
             if (Grounded() && moveAxis.y <= 0)
             {
                 int _recoilLR = pState.lookRight ? 1 : -1;
-                // XÃà °ø°İ
+                // Xì¶• ê³µê²©
                 Hit(XAttack, XAttackArea, ref pState.recoilingX, Vector2.right * _recoilLR, recoilXSpeed);
             }
-            // yÃà ÀÌµ¿°ªÀÌ À§¸¦ ÇâÇÑ´Ù¸é
+            // yì¶• ì´ë™ê°’ì´ ì–‘ìˆ˜ ê°’ì´ë¼ë©´
             else if (moveAxis.y > 0)
             {
-                // À§ÂÊ °ø°İ
+                // ìœ„ìª½ ê³µê²©
             }
-            // ¶¥¿¡ ´ê¾ÆÀÖÁö ¾ÊÀºµ¥ yÃà ÀÌµ¿°ªÀÌ ¾Æ·¡¶ó¸é
+            // ë•…ì— ë‹¿ì§€ì•Šê³  yì¶• ì´ë™ê°’ì´ ì•„ë˜ìª½
             else if (!Grounded() && moveAxis.y < 0)
             {
-                // Á¡ÇÁ ÈÄ ¾Æ·¡ °ø°İ
+                // ê³µì¤‘ ì‹œ ì•„ë˜ ê³µê²©
             }
         }
     }
 
-    // ÇÃ·¹ÀÌ¾î °ø°İ ¹üÀ§ Ã³¸® ¸Ş¼­µå
-    // °ø°İ À§Ä¡ Æ®·£½ºÆû, °ø°İ ¹üÀ§, ¹İµ¿ÀÇ Ã³¸®¹æÇâ, ¹İµ¿ÀÇ ¼¼±â
+    // í”Œë ˆì´ì–´ ê³µê²© ê´€ë ¨ ì²˜ë¦¬ ë©”ì„œë“œ
+    // ê³µê²© ìœ„ì¹˜ íŠ¸ëœìŠ¤í¼, ê³µê²© ì˜ì—­, ë°˜ë™ê°’ ì²˜ë¦¬ë³€ìˆ˜, ë°˜ë™ê°’ ë°©í–¥
     void Hit(Transform _attackTransform, Vector2 _attackArea, ref bool _recoilBool,Vector2 _recoilDir, float _recoilStrength)
     {
-        // °ø°İ ¹üÀ§ ¹Ú½º¾È¿¡ °ø°İ°¡´ÉÇÑ ·¹ÀÌ¾î ¿ÀºêÁ§Æ®¸¦ toHit¹è¿­¿¡ ÀúÀå
+        // ê³µê²© ì˜ì—­ ë°•ìŠ¤ì•ˆì— ê³µê²©ê°€ëŠ¥í•œ ë ˆì´ì–´ ì˜¤ë¸Œì íŠ¸ë¥¼ toHitë°°ì—´ì— ì €ì¥
         Collider2D[] toHit = Physics2D.OverlapBoxAll(_attackTransform.position,_attackArea,0,attackablekLayer);
-        // ¸®½ºÆ® ÇÇ°İ Àû °´Ã¼¸¦ »ı¼ºÇÑ µÚ
+        // ë¦¬ìŠ¤íŠ¸ í”¼ê²© ëœ ì ì˜ ê°¯ìˆ˜ë¥¼ ë‹´ìŒ
         List<Enemy> hitEnemy = new List<Enemy>();
 
-        // ¹üÀ§¾È¿¡ µé¾î¿Â °ø°İ°¡´É ·¹ÀÌ¾î°¡ 0º¸´Ù ¸¹´Ù¸é
+        // ê³µê²©ì•ˆì— ìˆëŠ” ê³µê²©ê°€ëŠ¥ ë ˆì´ì–´ê°€ 0ë³´ë‹¤ í¬ë‹¤ë©´
         if (toHit.Length > 0)
         {
-            // ¹İµ¿ÀÌ ½ÇÇàµÉ ¼ö ÀÖ°Ô ÇÏ°í
+            // ë°˜ë™ì„ ì¤„ìˆ˜ê°€ ìˆê²Œ í•˜ê³ 
             _recoilBool = true;
         }
 
-        // °ø°İ¹üÀ§¾È¿¡ µé¾î¿Â ¼ö¸¸Å­ ¹İº¹¹® ½ÇÇà
+        // ê³µê²©ë²”ìœ„ì•ˆì— ìˆëŠ” ì ë§Œí¼ ë°˜ë³µë¬¸ ì‹¤í–‰
         for (int i = 0; i < toHit.Length; i++)
         {
-            // Enemy ½ºÅ©¸³Æ®°¡ ºÙ¾îÁø e °´Ã¼¿¡
-            // °ø°İ¹üÀ§¾È¿¡ µé¾î¿Â ¿ÀºêÁ§Æ®Áß Enemy ½ºÅ©¸³Æ®°¡ ºÙ¾îÁø °´Ã¼¸¦ ÀúÀåÇÏ°í
+            // Enemy ìŠ¤í¬ë¦½íŠ¸ê°€ ë¶™ì–´ìˆëŠ” e ê°ì²´ë¥¼
+            // ê³µê²©ë²”ìœ„ì•ˆì— ìˆëŠ” ì˜¤ë¸Œì íŠ¸ì— Enemy ìŠ¤í¬ë¦½íŠ¸ê°€ ë¶™ì–´ìˆëŠ” ê°ì²´ë¥¼ ìƒì„±í•˜ê³ 
             Enemy e = toHit[i].GetComponent<Enemy>();
 
-            // e °´Ã¼¿¡ Á¤»óÀûÀ¸·Î Enemy°¡ ºÙ¾îÁø ÀûÀÌ °¨ÁöµÆ°í, ÇÇ°İ ¸®½ºÆ®¿¡ Æ÷ÇÔµÇÁö ¾Ê¾Ò´Ù¸é
+            // e ê°ì²´ê°€ ì •ìƒì ìœ¼ë¡œ Enemyë¥¼ ë¶™ì—¬ì˜¨ ê²ƒì´ ë§ê³ , í”¼ê²© ë¦¬ìŠ¤íŠ¸ì— í¬í•¨ë˜ì§€ ì•Šì•˜ë‹¤ë©´
             if (e && !hitEnemy.Contains(e))
             {
-                // ÀûÀÇ Enemy ½ºÅ©¸³Æ®¿¡¼­ ÇÇ°İÃ³¸® ¸Ş¼­µå¸¦ ½ÇÇà
+                // í•´ë‹¹ Enemy ìŠ¤í¬ë¦½íŠ¸ì—ì„œ í”¼ê²©ì²˜ë¦¬ ë©”ì„œë“œë¥¼ ì‹¤í–‰
                 e.EnemyHit(playerDamage, _recoilDir, _recoilStrength);
-                // ¸®½ºÆ®¿¡ e °´Ã¼ Ãß°¡
+                // ë¦¬ìŠ¤íŠ¸ì— e ê°ì²´ ì¶”ê°€
                 hitEnemy.Add(e);
             }
-            // °ø°İ ¹üÀ§ ¾È¿¡ µé¾î¿Â °´Ã¼ÀÇ ÅÂ±×°¡ Enemy ¶ó¸é
+            // ê³µê²© ì˜ì—­ ì•ˆì— ìˆëŠ” ê°ì²´ì˜ íƒœê·¸ê°€ Enemy ë¼ë©´
             if (toHit[i].CompareTag("Enemy"))
             {
-                // ÇÃ·¹ÀÌ¾î°¡ °ø°İÇßÀ» ¶§, ¸¶³ª°¡ managain ¸¸Å­ È¸º¹
+                // í”Œë ˆì´ì–´ê°€ ë§ˆë‚˜ë¥¼ ì–»ìŒ, ë§ˆë‚˜ë¥¼ managain ë§Œí¼ íšŒë³µ
                 Mana += manaGain;
             }
         }
@@ -712,9 +712,9 @@ public class PlayerController : MonoBehaviour
 
 
     ///<summary>
-    /// ½ºÆç, ±â¼ú ¸Ş¼­µå
+    /// ë§ˆë²•, íë§ ë©”ì„œë“œ
     ///</summary>
-    /// º°µµÀÇ ÀÌÆåÆ® °¡Á®´Ù°¡ Ãß°¡ÇÏ±â.
+    /// ë§ˆë²•ì€ ë¦¬ìŠ¤íŠ¸ë¡œ ë§Œë“¤ì–´ë‹¤ê°€ ì¶”ê°€í•˜ê¸°.
     /// 
 
 
@@ -752,7 +752,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.A) && pState.casting)
         {
-            // Ä³½ºÆÃ ÁßÁö
+            // ìºìŠ¤íŒ… ì·¨ì†Œ
             Debug.Log("cast cancle");
             pState.casting = false;
             cast.CancelCasting();
@@ -769,25 +769,25 @@ public class PlayerController : MonoBehaviour
         {
             int _dir = pState.lookRight ? 1 : -1;
             spell_Idx = (Spell)currentSpell;
-            // ½ºÆç »ç¿ë
+            // ë§ˆë²• ì‚¬ìš©
             switch (spell_Idx)
             {
                 case Spell.FIREBALL:
-                    Debug.Log("1 ½ºÆç »ç¿ë");
+                    Debug.Log("1 ë²ˆì§¸ ë§ˆë²•");
                     useSpell = Fireball(_dir);
                     break;
 
                 case Spell.FIREBOMB:
-                    Debug.Log("2 ½ºÆç »ç¿ë");
+                    Debug.Log("2 ë²ˆì§¸ ë§ˆë²•");
                     useSpell = FireBomb(_dir);
                     break;
 
                 case Spell.FIRESPRAY:
-                    Debug.Log("3 ½ºÆç »ç¿ë");
+                    Debug.Log("3 ë²ˆì§¸ ë§ˆë²•");
                     useSpell = FireIncendiary(_dir);
                     break;
                 case Spell.FIREMETEOR:
-                    Debug.Log("4 ½ºÆç »ç¿ë");
+                    Debug.Log("4 ë²ˆì§¸ ë§ˆë²•");
                     useSpell = FireMeteor(_dir);
                     break;
 
@@ -798,7 +798,7 @@ public class PlayerController : MonoBehaviour
     {
         currentSpell++;
         currentSpell %= maxSpell;
-        Debug.Log($"{currentSpell+1} ¹ø ½ºÆç ¼±ÅÃ");
+        Debug.Log($"{currentSpell+1} ë²ˆ ë§ˆë²• ì„ íƒ");
     }
     GameObject Fireball(int _dir)
     {

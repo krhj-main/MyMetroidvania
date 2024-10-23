@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// ÇÃ·¹ÀÌ¾î¿¡ ºÎÂøµÈ ½ºÅ©¸³Æ®
-// ÇÃ·¹ÀÌ¾î »óÅÂ ³ªÅ¸³¿
+// í”Œë ˆì´ì–´ ìƒíƒœë¥¼ ìŠ¤í¬ë¦½íŠ¸
+// í”Œë ˆì´ì–´ ìƒíƒœ ë¦¬ìŠ¤íŠ¸
 public class PlayerStateList : MonoBehaviour
 {
-    public bool lookRight;              // ¿À¸¥ÂÊÀ» º¸°íÀÖ´ÂÁö ¿©ºÎ
-    public bool attacking;              // °ø°İÁßÀÎ »óÅÂÀÎÁö ¿©ºÎ
-    public bool dashing;                // ´ë½¬ÁßÀÎ »óÅÂÀÇ ¿©ºÎ
-    public bool invincible;             // ÇÇ°İ ½Ã ¹«Àû»óÅÂ ¿©ºÎ
-    public bool recoilingX;             // XÃà ¹İµ¿ ½ÇÇà ¿©ºÎ
-    public bool recoilingY;             // YÃà ¹İµ¿ ½ÇÇà ¿©ºÎ
-    public bool jumping;                // Á¡ÇÁÁßÀÎ »óÅÂ ¿©ºÎ
-    public bool healing;                // Èú ½ºÆç »óÅÂ ¿©ºÎ
-    public bool casting;                // ½ºÆç »ç¿ëÀ§ÇØ Ä³½ºÆÃ Áß ¿©ºÎ
-    public bool cutscene = false;               // ÄÆ È­¸éÀüÈ¯ ÁßÀÎÁö ¿©ºÎ
-    public bool alive = true;                  // ÇÃ·¹ÀÌ¾î°¡ »ì¾ÆÀÖ´ÂÁö ¿©ºÎ
+    public bool lookRight;              // ì˜¤ë¥¸ìª½ì„ ë°”ë¼ë³´ê³  ìˆëŠ”ì§€ ì—¬ë¶€
+    public bool attacking;              // ê³µê²©ì¤‘ì¸ì§€ ì—¬ë¶€
+    public bool dashing;                // ëŒ€ì‹œì¤‘ì¸ì§€ ì—¬ë¶€
+    public bool invincible;             // ë¬´ì  ìƒíƒœì¸ì§€ ì—¬ë¶€
+    public bool recoilingX;             // Xì¶• ë°˜ë™ ìƒíƒœ ì—¬ë¶€
+    public bool recoilingY;             // Yì¶• ë°˜ë™ ìƒíƒœ ì—¬ë¶€
+    public bool jumping;                // ì í”„ì¤‘ì¸ì§€ ì—¬ë¶€
+    public bool healing;                // í ì‚¬ìš© ì¤‘ì¸ì§€ ì—¬ë¶€
+    public bool casting;                // ë§ˆë²• ìŠ¤í‚¬ì„ ìºìŠ¤íŒ… ì¤‘ì¸ì§€ ì—¬ë¶€
+    public bool cutscene = false;               // ì»· ì”¬ ì§„í–‰ì¤‘ì¸ì§€ ì—¬ë¶€
+    public bool alive = true;                  // í”Œë ˆì´ì–´ê°€ ì‚´ì•„ìˆëŠ”ì§€ ì—¬ë¶€
 }

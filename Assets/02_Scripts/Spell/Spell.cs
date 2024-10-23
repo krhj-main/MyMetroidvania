@@ -44,14 +44,14 @@ public class Spell : MonoBehaviour
 
     protected virtual void Hit(Vector2 _attackArea, float _radius, float _recoilStrength)
     {
-        // °ø°İ ¹üÀ§ ¹Ú½º¾È¿¡ °ø°İ°¡´ÉÇÑ ·¹ÀÌ¾î ¿ÀºêÁ§Æ®¸¦ toHit¹è¿­¿¡ ÀúÀå
+        // ê³µê²© ë²”ìœ„ ë°•ìŠ¤ì•ˆì— ê³µê²©ê°€ëŠ¥í•œ ë ˆì´ì–´ ì˜¤ë¸Œì íŠ¸ë¥¼ toHitë°°ì—´ì— ì €ì¥
         
         int toHit = Physics2D.OverlapCircleNonAlloc(_attackArea, _radius,
                              hitSize, spellOption.spell_AttackablekLayer);
-        // ¸®½ºÆ® ÇÇ°İ Àû °´Ã¼¸¦ »ı¼ºÇÑ µÚ
+        // íˆíŠ¸ëœ ì  ê°ì²´ë¥¼ ë‹´ì„ ë¦¬ìŠ¤íŠ¸
         List<Enemy> hitEnemy = new List<Enemy>();
 
-        // °ø°İ¹üÀ§¾È¿¡ µé¾î¿Â ¼ö¸¸Å­ ¹İº¹¹® ½ÇÇà
+        // ê³µê²©ë²”ìœ„ì•ˆì— ìˆëŠ” ì ë“¤ë§Œí¼ ë°˜ë³µë¬¸ ì‹¤í–‰
         for (int i = 0; i < toHit; i++)
         {
             if (hitSize[i].CompareTag("Enemy"))
